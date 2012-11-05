@@ -8,6 +8,7 @@ import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.util.List;
 
 /**
  *
@@ -28,5 +29,18 @@ public class DBManager implements Serializable {
         Connection con = DriverManager.getConnection(dburl);
         this.con = con;
     }
+    
+    public static void shutdown(){}
+    
+    public User authenticate(String username, String password);
+        
+    public List<String> getCategory();
+    
+    public List<Product> getProductsByCategory(String category);
+    
+    
+    
+    
+    
     
 }

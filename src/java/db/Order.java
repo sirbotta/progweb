@@ -4,10 +4,15 @@
  */
 package db;
 
+import java.util.Date;
+
 /**
  *
  * @author Samuele
  */
 public class Order {
-    
+    int id, quantity;
+    double totalPrice;
+    Date date;
+    String product, buyer, urlReceipt;
 }

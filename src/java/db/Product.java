@@ -4,10 +4,16 @@
  */
 package db;
 
+import java.util.Date;
+
+
 /**
  *
  * @author Samuele
  */
 public class Product {
-    
+    String name, user, category, um, urlImage;
+    int id, quantity;
+    double price;
+    Date ciccio;
 }

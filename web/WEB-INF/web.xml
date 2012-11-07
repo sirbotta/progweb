@@ -62,7 +62,7 @@
         <servlet-class>servlets.ShowProductsSellerServlet</servlet-class>
     </servlet>
 
-     <servlet>
+    <servlet>
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>servlets.AddProductServlet</servlet-class>
     </servlet>
@@ -91,7 +91,7 @@
     </servlet-mapping> 
 
 
-     <servlet-mapping>  
+    <servlet-mapping>  
         <servlet-name>LandingSeller</servlet-name>
         <url-pattern>/Seller</url-pattern>
     </servlet-mapping>

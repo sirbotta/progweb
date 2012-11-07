@@ -1,0 +1,22 @@
+Progetto di Programmazione WEB e Programmazione 2 in JAVA
+
+
+Il progetto simula un semplice ecommerce agricolo con pagine e funzioni per un ipotetico buyer e seller.
+Le tecnologie usate sono TOMCAT, java EE , apache Derby.
+
+Il sistema utilizza i pattern di servlet, filtri e listener.
+
+#Ciclo utente Buyer
+Login
+->Landing Page
+	->Product Page by category
+		->Confirm Order
+	->Logout
+
+#Ciclo utente seller
+Login
+->Landing Page
+	->Add Product
+	->Check Order
+	->Logout
+

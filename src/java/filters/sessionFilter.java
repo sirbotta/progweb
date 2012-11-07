@@ -19,6 +19,7 @@ import javax.servlet.ServletResponse;
  *
  * @author simone
  */
+//filtro per gestire le pagine da vedere solo se loggati
 public class sessionFilter implements Filter {
     
     private static final boolean debug = true;

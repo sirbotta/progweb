@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author simone
  */
+//servlet per terminare la sessione utente
 public class LogoutServlet extends HttpServlet {
 
     /**

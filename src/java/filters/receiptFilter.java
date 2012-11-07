@@ -19,6 +19,8 @@ import javax.servlet.ServletResponse;
  *
  * @author simone
  */
+
+//filtro per gestire la sicurezza delle ricevute in PDF
 public class receiptFilter implements Filter {
     
     private static final boolean debug = true;

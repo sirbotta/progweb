@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author simone
  */
+//pagine iniziale per un seller dopo essersi loggato
 public class LandingSellerServlet extends HttpServlet {
 
     /**

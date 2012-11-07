@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author simone
  */
+//servlet che controlla il login utente e la sessione
 public class LoginServlet extends HttpServlet {
 
     /**

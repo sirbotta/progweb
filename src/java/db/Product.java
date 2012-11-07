@@ -15,7 +15,9 @@ import java.util.Date;
 public class Product implements Serializable{
     String name, user, category, um, urlImage;
     int id, quantity;
-
+    double price;
+    Date date;
+    
     public String getName() {
         return name;
     }
@@ -80,13 +82,12 @@ public class Product implements Serializable{
         this.price = price;
     }
 
-    public Date getCiccio() {
-        return ciccio;
+    public Date getDate() {
+        return date;
     }
 
-    public void setCiccio(Date ciccio) {
-        this.ciccio = ciccio;
+    public void setDate(Date date) {
+        this.date = date;
     }
-    double price;
-    Date ciccio;
+    
 }

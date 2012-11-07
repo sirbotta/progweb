@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Samuele
  */
+//pagina per confermare la creazione di un ordine da un buyer, inoltre crea il pdf con la ricevuta
 public class ConfirmProductsServlet extends HttpServlet {
 
     /**

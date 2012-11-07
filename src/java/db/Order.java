@@ -14,6 +14,8 @@ import java.util.Date;
 public class Order implements Serializable{
     int id, quantity;
     double totalPrice;
+    Date date;
+    String product, buyer, urlReceipt;
 
     public int getId() {
         return id;
@@ -70,6 +72,5 @@ public class Order implements Serializable{
     public void setUrlReceipt(String urlReceipt) {
         this.urlReceipt = urlReceipt;
     }
-    Date date;
-    String product, buyer, urlReceipt;
+    
 }

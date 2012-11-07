@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author simone
  */
+//servlet per la pagina che aggiunge i prodotti a db dal seller
 public class AddProductServlet extends HttpServlet {
 
     /**

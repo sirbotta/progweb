@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Samuele
  */
+//pagina iniziale per un buyer dopo essersi loggato, mostra le categorie dei prodotti e gli ordini precedenti
 public class LandingBuyerServlet extends HttpServlet {
 
     /**

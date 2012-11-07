@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Samuele
  */
+//servlet che mostra i prodotti da una categoria scelta dal buyer
 public class ShowProductsBuyerServlet extends HttpServlet {
 
     /**

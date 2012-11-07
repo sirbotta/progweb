@@ -4,10 +4,34 @@
         <param-name>dburl</param-name>
         <param-value>jdbc:derby://localhost:1527/jbp</param-value>
     </context-param>
+    <filter>
+        <filter-name>sessionFilter</filter-name>
+        <filter-class>filters.sessionFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>receiptFilter</filter-name>
+        <filter-class>filters.receiptFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>receiptFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>sessionFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <listener>
         <description>ServletContextListener</description>
         <listener-class>listeners.WebappContextListener</listener-class>
     </listener>
+    <servlet>
+        <servlet-name>Login</servlet-name>
+        <servlet-class>servlets.LoginServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Login</servlet-name>
+        <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
     <session-config>
         <session-timeout>
             30

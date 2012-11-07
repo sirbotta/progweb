@@ -28,9 +28,33 @@
         <servlet-name>Login</servlet-name>
         <servlet-class>servlets.LoginServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>LandingBuyerServlet</servlet-name>
+        <servlet-class>servlets.LandingBuyerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ShowProductsBuyer</servlet-name>
+        <servlet-class>servlets.ShowProductsBuyerServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ConfirmServlet</servlet-name>
+        <servlet-class>servlets.ConfirmProductsServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>LandingBuyerServlet</servlet-name>
+        <url-pattern>/Buyer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ShowProductsBuyer</servlet-name>
+        <url-pattern>/ProductsBuyer</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ConfirmServlet</servlet-name>
+        <url-pattern>/Confirm</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

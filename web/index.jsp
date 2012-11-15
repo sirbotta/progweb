@@ -23,6 +23,6 @@
                 <input type="submit">
                 <input type="reset">
             </div>
-        </form>s
+        </form>
     </body>
 </html>

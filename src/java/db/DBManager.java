@@ -7,7 +7,10 @@ package db;
 import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
 
@@ -20,7 +23,7 @@ public class DBManager implements Serializable {
     // transient == non viene serializzato
 
     private transient Connection con;
-    
+
     //inizializza il db gestendo le eccezioni,  WebAppContextLIstener lo avvia per ogni sessione
     public DBManager(String dburl) throws SQLException {
         try {
@@ -32,42 +35,75 @@ public class DBManager implements Serializable {
         Connection con = DriverManager.getConnection(dburl);
         this.con = con;
     }
-    
+
     //chiude il db dopo la sessione utente
-    public static void shutdown(){
-    try {
+    public static void shutdown() {
+        try {
             DriverManager.getConnection("jdbc:derby:;shutdown=true");
         } catch (SQLException ex) {
             Logger.getLogger(DBManager.class.getName()).info(ex.getMessage());
         }
     }
-    
+
     //controlla se esiste l'utente e restituisce l'oggetto user con i dati
-    public User authenticate(String username, String password);
+    public User authenticate(String username, String password) throws SQLException {
+         PreparedStatement stm = con.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+        try {
+            stm.setString(1, username);
+            stm.setString(2, password);
+            ResultSet rs = stm.executeQuery();
+            try {
+                if (rs.next()) {
+                    User user = new User();
+                    user.setId(rs.getInt("id"));
+                    user.setUsername(username);
+                    user.setRole(rs.getString("role"));
+                    return user;
+                } else {
+                    return null;
+                }
+            } finally {
+                // ricordarsi SEMPRE di chiudere i ResultSet in un blocco
+                rs.close();
+            }
+        } finally { // ricordarsi SEMPRE di chiudere i PreparedStatement in un blocco finally
+            stm.close();
+        }
         
+        
+    }
+
     //recupera la lista delle categorie dal DB
-    public List<String> getCategory();
-    
+    public List<String> getCategory() {
+        return new ArrayList<String>();
+    }
+
     //recupera la lista dei prodotti dal DB per categorie (solo buyer)
-    public List<Product> getProductsByCategory(String category);
-    
+    public List<Product> getProductsByCategory(String category) {
+        return new ArrayList<Product>();
+    }
+
     //recupera la lista dei prodotti dal db per un seller
-    public List<Product> getProductsBySeller(int seller_id);
-    
+    public List<Product> getProductsBySeller(int seller_id) {
+        return new ArrayList<Product>();
+    }
+
     //recupera la lista degli ordini dal db per un seller
-    public List<Product> getOrdersBySeller(int seller_id);
-    
+    public List<Product> getOrdersBySeller(int seller_id) {
+        return new ArrayList<Product>();
+    }
+
     //recupera la lista degli ordini dal db per un buyer
-    public List<Product> getOrdersByBuyer(int buyer_id);
-    
+    public List<Product> getOrdersByBuyer(int buyer_id) {
+        return new ArrayList<Product>();
+    }
+
     //aggiunge un prodotto nel DB 
-    public void addProductByBuyer(int buyer_id,String product_name,int quantity,double price, String Um);
-    
+    public void addProductByBuyer(int buyer_id, String product_name, int quantity, double price, String Um) {
+    }
+
     //crea un ordine a db e scala la quantità da products, se fallisce restituisce false
-    public Boolean createOrder(int Seller_id,int quantity);
-    
-    
-    
-    
-    
+    public Boolean createOrder(int Seller_id, int quantity) {
+        return true;
+    }
 }

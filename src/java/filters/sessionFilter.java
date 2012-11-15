@@ -14,6 +14,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -108,7 +110,12 @@ public class sessionFilter implements Filter {
         
         Throwable problem = null;
         try {
-            chain.doFilter(request, response);
+             HttpSession session = ((HttpServletRequest) request).getSession(false);
+            if (session == null || session.getAttribute("user") == null) {
+                filterConfig.getServletContext().getRequestDispatcher("/").forward(request, response);
+            } else {
+                chain.doFilter(request, response);
+            }
         } catch (Throwable t) {
             // If an exception is thrown somewhere down the filter chain,
             // we still want to execute our after processing, and then

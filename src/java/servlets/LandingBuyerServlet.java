@@ -83,11 +83,11 @@ public class LandingBuyerServlet extends HttpServlet {
          * <li><a href=\"">Categoria</a></li>
          */
         for(Category categoria:categorie){
-                String relPath = "ProductPage?cat=" + categoria.getId();
+                String relPath = "ProductsBuyer?cat=" + categoria.getId();
                         
                 body+="<li>"
                         + "<a href='"
-                        + getServletContext().getRealPath(relPath)
+                        + getServletContext().getContextPath()+"/"+relPath
                         + "'>"
                         + categoria.getName()
                         +"</a>"

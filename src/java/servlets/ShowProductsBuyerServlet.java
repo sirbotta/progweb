@@ -4,10 +4,16 @@
  */
 package servlets;
 
+import db.DBManager;
+import db.Product;
 import helpers.PageHelper;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.SQLException;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +25,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 //servlet che mostra i prodotti da una categoria scelta dal buyer
 public class ShowProductsBuyerServlet extends HttpServlet {
+    
+     private DBManager manager;
 
+    @Override
+    public void init() throws ServletException {
+        // inizializza il DBManager dagli attributi di Application
+        this.manager = (DBManager) super.getServletContext().getAttribute("dbmanager");
+    }
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and
@@ -31,7 +44,10 @@ public class ShowProductsBuyerServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws SQLException,ServletException, IOException  {
+        String categoria = request.getParameter("cat");
+        List<Product> prodotti = manager.getProductsByCategory(categoria);
+        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         PageHelper page = new PageHelper("Products - buyer");
@@ -99,7 +115,11 @@ public class ShowProductsBuyerServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowProductsBuyerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -114,7 +134,11 @@ public class ShowProductsBuyerServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        try {
+            processRequest(request, response);
+        } catch (SQLException ex) {
+            Logger.getLogger(ShowProductsBuyerServlet.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

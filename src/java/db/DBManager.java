@@ -98,9 +98,9 @@ public class DBManager implements Serializable {
     //recupera la lista dei prodotti dal DB per categorie (solo buyer)
     public List<Product> getProductsByCategory(String category_id) throws SQLException {
          List<Product> products = new ArrayList<Product>();
-        PreparedStatement stm = con.prepareStatement("SELECT products.*,Category.name,Users.name"
-                + "FROM prdoucts,category,users "
-                + "WHERE products..category_id = ?"
+        PreparedStatement stm = con.prepareStatement("SELECT products.*,category.name,users.username "
+                + "FROM products,category,users "
+                + "WHERE products.category_id = ? "
                 + "AND category.id = products.category_id "
                 + "AND user.id = seller.id");
         
@@ -112,7 +112,7 @@ public class DBManager implements Serializable {
                     Product p = new Product();
                     p.setId(rs.getInt("products.id"));
                     p.setName(rs.getString("products.name"));
-                    p.setUser(rs.getString("user.name"));
+                    p.setUser(rs.getString("user.username"));
                     p.setCategory(rs.getString("category.name"));
                     p.setQuantity(rs.getInt("products.quantity"));
                     p.setPrice(rs.getDouble("products.price"));

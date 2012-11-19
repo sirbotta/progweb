@@ -1,6 +1,7 @@
-/nbproject/
 /build/
 /dist/
 !/nbproject/build-impl.xml
 !/nbproject/project.xml
 !/nbproject/ant-deploy.xml
+/nbproject/private/
+/nbproject/project.properties

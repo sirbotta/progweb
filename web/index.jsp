@@ -6,23 +6,49 @@
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+    <head>		
+        <!-- meta -->
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width, initial-scale=1.0'>
+        <meta name='description' content=''>
+        <meta name='author' content=''>	
+
+        <!-- stili -->
+        <link href='css/bootstrap.css' rel='stylesheet' media='screen'>
+        <link href='css/bootstrap.min.css' rel='stylesheet' media='screen'>
+        <link href='css/bootstrap-responsive.css' rel='stylesheet' media='screen'>
+        <link href='css/bootstrap-responsive.min.css' rel='stylesheet' media='screen'>		
+        <link href='css/style.css' rel='stylesheet' media='screen'>		
+
+        <title>Login</title>
     </head>
     <body>
-        <form action="Login">
-            <div>
-                Username: <input type="text" name="username">
+        <div class='container-fluid' id='login'>
+            <div class='row-fluid'>
+                <div class='span6 offset3'>
+                    <h1>
+                        SiteName
+                    </h1>
+                </div>
+            </div>			
+            <!-- end of row-fluid -->
+            <div class='row-fluid'>
+                <div class='span6 offset3'>
+                    <form action="Login" method="POST">
+                        <label>Login</label>
+                        <input type='text' placeholder='username' name='username'>
+                        <input type='password' placeholder='password' name='password'>
+                        <label class='checkbox'>
+                            <input type='checkbox'> Remember me
+                        </label>
+                        <button type='submit' class='btn'>Sign in</button>
+                    </form>
+                </div>
             </div>
-            <div>
-                Password: <input type="password" name="password">
-            </div>
-            <div>
-                <input type="submit">
-                <input type="reset">
-            </div>
-        </form>
+            <!-- end of row-fluid -->
+        </div>
+        <!-- end of container-fluid -->
     </body>
 </html>

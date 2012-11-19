@@ -4,6 +4,9 @@
  */
 package servlets;
 
+import db.DBManager;
+import helpers.PageHelper;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -17,6 +20,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 //pagina iniziale per un buyer dopo essersi loggato, mostra le categorie dei prodotti e gli ordini precedenti
 public class LandingBuyerServlet extends HttpServlet {
+    
+    private DBManager manager;
+
+    @Override
+    public void init() throws ServletException {
+        // inizializza il DBManager dagli attributi di Application
+        this.manager = (DBManager) super.getServletContext().getAttribute("dbmanager");
+    }
 
     /**
      * Processes requests for both HTTP
@@ -31,18 +42,75 @@ public class LandingBuyerServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        List<Category> categorie = DBManager.getCategories();
         PrintWriter out = response.getWriter();
+        PageHelper page = new PageHelper("Landing page - Buyer");
+        String body = "";
+        body += "<div class=\"container-fluid\" >\n";
+        body += "<div class=\"row-fluid\">\n";
+        body += "<div class=\"span4\"></div>\n";
+        body += "<div class=\"span6 \">\n";
+        body += "<h1>\n";
+        body += "SiteName\n";
+        body += "</h1>\n";
+        body += "</div>\n";
+        body += "<div class=\"span2\">\n";
+        body += "<a href=\"#\">Sign out</a>\n";
+        body += "</div>\n";
+        body += "</div>\n";
+        body += "<!-- end of row-fluid -->\n";
+        body += "<div class=\"row-fluid\">\n";
+        body += "<div class=\"span10 offset1\">\n";
+        body += "<div class=\"navbar\">\n";
+        body += "<div class=\"navbar-inner \">\n";
+        body += "<div class=\"container\">\n";
+        body += "<!-- .btn-navbar is used as the toggle for collapsed navbar content -->\n";
+        body += "<a class=\"btn btn-navbar\" data-toggle=\"collapse\" data-target=\".nav-collapse\">\n";
+        body += "<span class=\"icon-bar\"></span>\n";
+        body += "<span class=\"icon-bar\"></span>\n";
+        body += "<span class=\"icon-bar\"></span>\n";
+        body += "</a>\n";
+        body += "<a class=\"brand\" href=\"#\">PRODOTTI</a>\n";
+        body += "<!-- Everything you want hidden at 940px or less, place within here -->\n";
+        body += "<div class=\"nav-collapse\">\n";
+        body += "<ul class=\"nav\">\n";
+        /*
+         * Inizio del ciclo per mostrare le categorie
+         * <li><a href=\"">Categoria</a></li>
+         */
+        foreach(Category categoria:categorie){
+                String relPath = "ProductPage?cat=" + categoria.id;
+                        
+                body+="<li>"
+                        + "<a href='"
+                        + getServletContext().getRealPath(relPath)
+                        + "'>"
+                        + categoria.name
+                        +"</a>"
+                        + "</li>\n";
+            }       
+        /*
+         * fine del ciclo
+         */
+        body += "</ul>\n";
+        body += "</div>\n";
+        body += "</div>\n";
+        body += "</div>\n";
+        body += "</div>\n";
+        body += "</div>\n";
+        body += "</div>\n";
+        body += "<!-- end of row-fluid -->\n";
+        body += "</div>\n";
+        body += "<!-- end of container-fluid -->\n";
+
+        page.addContent(body);
+
         try {
             /* TODO output your page here. You may use following sample code. */
-            out.println("<html>");
-            out.println("<head>");
-            out.println("<title>Servlet LandingBuyerServlet</title>");            
-            out.println("</head>");
-            out.println("<body>");
-            out.println("<h1>Servlet LandingBuyerServlet at " + request.getContextPath() + "</h1>");
-            out.println("</body>");
-            out.println("</html>");
-        } finally {            
+
+            out.println(page.getFullPage());
+
+        } finally {
             out.close();
         }
     }

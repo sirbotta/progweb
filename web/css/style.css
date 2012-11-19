@@ -1,0 +1,33 @@
+.navbar-inner{    
+	border: 1px solid #7F705D ;
+    border-radius: 4px 4px 4px 4px ;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067) ;
+}
+
+input{
+	color: #fff !important;
+}
+
+.active > a{
+	color: #FFE0BA !important;
+	font-weight: bold;
+}
+#scana{
+	border-right-color: white;
+	border-right-width: 1px;
+	border-right-style: solid;
+}
+
+.tabs-left > .nav-tabs > li > a {
+    margin-right: none !important;
+}
+
+.nav > li > a:hover {
+	color: #FFF !important;
+    background-color: transparent !important;
+}
+.img{
+	max-width: 200px;
+	max-height: 200px;
+	float: right;
+}

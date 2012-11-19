@@ -1,3 +1,6 @@
 /nbproject/
 /build/
 /dist/
+!/nbproject/build-impl.xml
+!/nbproject/project.xml
+!/nbproject/ant-deploy.xml

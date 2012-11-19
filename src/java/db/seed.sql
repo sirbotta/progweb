@@ -9,3 +9,10 @@ INSERT INTO USERS (username,password,role) VALUES
 ('gino','gino','buyer'),
 ('perla','perla','buyer'),
 ('scana','scana','buyer'); 
+
+
+
+
+
+INSERT INTO PRODUCTS (name,seller_id,category_id,quantity,um,price,date_timeinsert,url_image) VALUES 
+('Carota',3,1,10,'KG',5,'2012-11-19','http://www.franciavincenzo.altervista.org/casa/IMMAGINI/carota.jpg'); 

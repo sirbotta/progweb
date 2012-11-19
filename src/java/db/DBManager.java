@@ -74,13 +74,60 @@ public class DBManager implements Serializable {
     }
 
     //recupera la lista delle categorie dal DB
-    public List<String> getCategory() {
-        return new ArrayList<String>();
+    public List<Category> getCategories() throws SQLException {
+        List<Category> categoryList = new ArrayList<Category>();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM category");
+        try {
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    Category c = new Category(); 
+                    c.setId(rs.getInt("id"));
+                    c.setName(rs.getString("name"));
+                    categoryList.add(c);
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+        return categoryList;       
     }
 
     //recupera la lista dei prodotti dal DB per categorie (solo buyer)
-    public List<Product> getProductsByCategory(String category) {
-        return new ArrayList<Product>();
+    public List<Product> getProductsByCategory(String category_id) throws SQLException {
+         List<Product> products = new ArrayList<Product>();
+        PreparedStatement stm = con.prepareStatement("SELECT products.*,Category.name,Users.name"
+                + "FROM prdoucts,category,users "
+                + "WHERE products..category_id = ?"
+                + "AND category.id = products.category_id "
+                + "AND user.id = seller.id");
+        
+        stm.setString(1, category_id);
+        try {
+            ResultSet rs = stm.executeQuery();
+            try {
+                while (rs.next()) {
+                    Product p = new Product();
+                    p.setId(rs.getInt("products.id"));
+                    p.setName(rs.getString("products.name"));
+                    p.setUser(rs.getString("user.name"));
+                    p.setCategory(rs.getString("category.name"));
+                    p.setQuantity(rs.getInt("products.quantity"));
+                    p.setPrice(rs.getDouble("products.price"));
+                    p.setUm(rs.getString("products.um"));
+                    p.setUrlImage(rs.getString("products.url_image"));
+                    p.setDate(rs.getDate("products.date_timeinsert"));
+                    products.add(p);
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+        return products;
     }
 
     //recupera la lista dei prodotti dal db per un seller
@@ -103,7 +150,7 @@ public class DBManager implements Serializable {
     }
 
     //crea un ordine a db e scala la quantità da products, se fallisce restituisce false
-    public Boolean createOrder(int Seller_id, int quantity) {
+    public Boolean createOrder(int product_id, int quantity) {
         return true;
     }
 }

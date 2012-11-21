@@ -45,9 +45,9 @@ public class DBManager implements Serializable {
         }
     }
 
-    //controlla se esiste l'utente e restituisce l'oggetto user con i dati
+       //controlla se esiste l'utente e restituisce l'oggetto user con i dati
     public User authenticate(String username, String password) throws SQLException {
-         PreparedStatement stm = con.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
         try {
             stm.setString(1, username);
             stm.setString(2, password);
@@ -69,8 +69,8 @@ public class DBManager implements Serializable {
         } finally { // ricordarsi SEMPRE di chiudere i PreparedStatement in un blocco finally
             stm.close();
         }
-        
-        
+
+
     }
 
     //recupera la lista delle categorie dal DB
@@ -94,6 +94,43 @@ public class DBManager implements Serializable {
         }
         return categoryList;
     }
+    
+    public Product getProductById(int product_id) throws SQLException {
+        Product p = new Product();
+        PreparedStatement stm = con.prepareStatement(
+                "SELECT products.*,category.name as category,users.USERNAME as seller "
+                + "FROM products "
+                + "INNER JOIN category on products.category_id=category.id "
+                + "INNER JOIN users on products.SELLER_ID=users.id "
+                + "WHERE products.id = ?");
+
+        stm.setInt(1, product_id);
+        try {
+            ResultSet rs = stm.executeQuery();
+            try {
+                if (rs.next()) {
+                    p.setId(rs.getInt("id"));
+                    p.setName(rs.getString("name"));
+                    p.setUser(rs.getString("seller"));
+                    p.setCategory(rs.getString("category"));
+                    p.setQuantity(rs.getInt("quantity"));
+                    p.setPrice(rs.getDouble("price"));
+                    p.setUm(rs.getString("um"));
+                    p.setUrlImage(rs.getString("url_image"));
+                    p.setDate(rs.getDate("date_timeinsert"));
+                    return p;
+                } else
+                {
+                    return null;
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+    }
+    
 
     //recupera la lista dei prodotti dal DB per categorie (solo buyer)
     public List<Product> getProductsByCategory(int category_id) throws SQLException {
@@ -191,6 +228,7 @@ public class DBManager implements Serializable {
                     o.setProduct(rs.getString("name"));
                     o.setQuantity(rs.getInt("quantity"));
                     o.setTotalPrice(rs.getDouble("price"));
+                    o.setUrlReceipt(rs.getString("url_receipt"));
                     o.setUm(rs.getString("um"));
                     o.setDate(rs.getDate("date_timestamp"));
                     orders.add(o);
@@ -206,7 +244,7 @@ public class DBManager implements Serializable {
 
     //recupera la lista degli ordini dal db per un buyer
     public List<Order> getOrdersByBuyer(int buyer_id) throws SQLException {
-         List<Order> orders = new ArrayList<Order>();
+        List<Order> orders = new ArrayList<Order>();
         PreparedStatement stm = con.prepareStatement(
                 "SELECT products.*,orders.*,buyers.USERNAME as buyer , sellers.USERNAME as seller "
                 + "FROM orders "
@@ -227,6 +265,7 @@ public class DBManager implements Serializable {
                     o.setProduct(rs.getString("name"));
                     o.setQuantity(rs.getInt("quantity"));
                     o.setTotalPrice(rs.getDouble("price"));
+                    o.setUrlReceipt(rs.getString("url_receipt"));
                     o.setUm(rs.getString("um"));
                     o.setDate(rs.getDate("date_timestamp"));
                     orders.add(o);
@@ -238,5 +277,68 @@ public class DBManager implements Serializable {
             stm.close();
         }
         return orders;
+    }
+
+    //aggiunge un prodotto nel DB 
+    public int addProduct(String product_name, int seller_id, int category_id, int quantity, String UM, double price, String url_image) throws SQLException {
+        PreparedStatement stm = con.prepareStatement(
+                "INSERT INTO APP.PRODUCTS (NAME, SELLER_ID, CATEGORY_ID, QUANTITY, UM, PRICE, DATE_TIMEINSERT, URL_IMAGE) "
+                + "VALUES (?,?,?,?,?,?,?,?)");
+
+
+        java.util.Date today = new java.util.Date();
+        java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+
+        stm.setString(1, product_name);
+        stm.setInt(2, seller_id);
+        stm.setInt(3, category_id);
+        stm.setInt(4, quantity);
+        stm.setString(5, UM);
+        stm.setDouble(6, price);
+        stm.setDate(7, sqlToday);
+        stm.setString(8, url_image);
+
+        try {
+            return stm.executeUpdate();
+        } finally {
+            stm.close();
+        }
+    }
+
+    //crea un ordine a db 
+    public int createOrder(int product_id, int buyer_id, int quantity, double price, String receipt_url) throws SQLException {
+        PreparedStatement stm = con.prepareStatement(
+                "INSERT INTO ORDERS (DATE_TIMESTAMP, PRODUCT_ID, BUYER_ID, QUANTITY, TOTAL_PRICE, URL_RECEIPT) "
+                + "VALUES (?, ?, ?, ?, ?, ?)");
+
+        java.util.Date today = new java.util.Date();
+        java.sql.Date sqlToday = new java.sql.Date(today.getTime());
+        stm.setDate(1, sqlToday);
+        stm.setInt(2, product_id);
+        stm.setInt(3, buyer_id);
+        stm.setInt(4, quantity);
+        stm.setDouble(5, price);
+        stm.setString(6, receipt_url);
+
+        try {
+            return stm.executeUpdate();
+        } finally {
+            stm.close();
+        }
+    }
+
+    //scala la quantità da products, se fallisce restituisce 0
+    public int removeProduct(int product_id) throws SQLException {
+        PreparedStatement stm = con.prepareStatement(
+                "UPDATE products "
+                + "SET quantity=0 "
+                + "WHERE id= ?");
+        stm.setInt(1, product_id);
+
+        try {
+            return stm.executeUpdate();
+        } finally {
+            stm.close();
+        }
     }
 }

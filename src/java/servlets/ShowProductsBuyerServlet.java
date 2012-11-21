@@ -5,6 +5,7 @@
 package servlets;
 
 import db.DBManager;
+import db.Order;
 import db.Product;
 import helpers.PageHelper;
 
@@ -18,6 +19,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -50,47 +52,81 @@ public class ShowProductsBuyerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         PageHelper page = new PageHelper("Products - buyer");
+        
         String body = "";
         body += "<div class=\"container-fluid\" >";
         body += "<div class=\"row-fluid\">";
         body += "<div class=\"span12\"></div>";
         body += "</div>";
         body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span3\"></div>";
+        body += "<div class=\"span3\">"
+                +"<a href="+ getServletContext().getContextPath()+"/Buyer" +">Home</a>\n"
+                + "</div>";
         body += "<div class=\"span6\">";
         body += "<h1>Category</h1>";
         body += "</div>";
         body += "<div class=\"span3\">\n";
-        body += "<a href=\"#\">Sign out</a>\n";
+        body += "<a href="+ getServletContext().getContextPath()+"/Logout" +">Sign out</a>\n";
         body += "</div>\n";
-        body += "</div>";
-        body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span2\"></div>";
-        body += "<div class=\"span8\" id=\"scana\">";
-        body += "<div class=\"tabbable tabs-left\" id=\"ciccio\">";
-        body += "<ul class=\"nav nav-tabs\">";
-        body += "<li><a href=\"#tab1\" data-toggle=\"tab\">Name 1</a></li>";
-        body += "<li><a href=\"#tab2\" data-toggle=\"tab\">Name 2</a></li>";
-        body += "</ul>";
-        body += "<div class=\"tab-content\">";
-        body += "<div class=\"tab-pane\" id=\"tab1\">";
-        body += "<div class=\"span9\">";
-        body += "<h5>Prezzo</h5>";
-        body += "<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>";
-        body += "</div>";
-        body += "<img src=\"frutta.jpg\" alt=\"\" class=\"img span3\">";
-        body += "</div>";
-        body += "<div class=\"tab-pane\" id=\"tab2\">";
-        body += "<img src=\"verdure.jpg\" alt=\"\" class=\"img span3\">";
-        body += "</div>";
-        body += "</div>";
-        body += "</div>";
-        body += "</div>";
-        body += "<div class=\"span2\"></div>";
-        body += "</div>";
-        body += "<!-- end of row-fluid -->";
-        body += "</div>";
-        body += "<!-- end of container-fluid -->";
+        body += "</div>\n";
+        body += "<div class=\"row-fluid\">\n";
+        body += "<div class=\"span2\"></div>\n";
+        body += "<div class=\"span8\" id=\"scana\">\n";
+        body += "<div class=\"tabbable tabs-left\">\n";
+        body += "<ul class=\"nav nav-tabs\">\n";
+        /*
+         * Il ciclo scorre i prodotti ottenuti dal db manager
+         * e crea un <li><a href=\"#tabN\" data-toggle=\"tab\">NomeProdotto</a></li> 
+         * per ogni prodotto trovato
+         */
+        int c=1;
+        for(Product prodotto:prodotti){
+            body += "<li><a href='#tab"+ c +"' data-toggle='tab'>"+ prodotto.getName() +"</a></li>\n";
+            c++;
+        }
+        c=1;
+        body += "</ul>\n";
+        /*
+         * Inizio il ciclo per le informazioni dei songoli prodotti
+         *  body += "<div class=\"tab-pane\" id=\"tab1\">\n";
+         *      body += "<div class=\"span9\">\n";
+         *          body += "<h5>Prezzo</h5>\n";
+         *          body += "<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>\n";
+         *         body += "</div>\n";
+         *  body += "<img src=\"frutta.jpg\" alt=\"\" class=\"img span3\">\n";
+         * 
+         */
+        body += "<div class=\"tab-content\">\n";
+        for(Product prodotto:prodotti){
+            body += "<div class=\"tab-pane\" id='tab"+ c +"'>\n";
+            body += "<div class=\"span9\">\n";
+            body += "<h5>Prezzo "+ prodotto.getPrice() +"&#128;</h5>\n";
+            body += "<p>Disonibili "+ prodotto.getQuantity()+" "+ prodotto.getUm() +"<br>"
+                    + "Venditore "
+                    + prodotto.getUser()
+                    +"<br><br>";
+                    
+            if( prodotto.getQuantity()==0 ){
+                body += "PRODOTTO NON DISPONIBILE";
+            }
+            else{
+                body += "<a href='"
+                        + getServletContext().getContextPath()+
+                        "/Confirm?product="+ prodotto.getId()
+                        +"'><button class='btn btn-mini'>Compra</button></a>";                        
+            }
+            body += "</p></div>\n";
+            body += "<img src='"+ prodotto.getUrlImage() +"' alt=\"\" class=\"img span3\">\n";
+            body += "</div>\n";
+            c++;
+        }       
+  
+        body += "</div>\n";                
+        body += "<div class=\"span2\"></div>\n";
+        body += "</div>\n";
+        body += "<!-- end of row-fluid -->\n";
+        body += "</div>\n";
+        body += "<!-- end of container-fluid -->\n";
 
         page.addContent(body);
         try {

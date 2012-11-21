@@ -103,9 +103,38 @@ public class LandingBuyerServlet extends HttpServlet {
         body += "</div>\n";
         body += "</div>\n";
         body += "</div>\n";
-        body += "<!-- end of row-fluid -->\n";
-        body += "</div>\n";
-        body += "<!-- end of container-fluid -->\n";
+        body += "<!-- end of row-fluid -->\n"; 
+        body += "<div class=\"row-fluid\">";
+        body += "<div class=\"span2\"></div>";
+        body += "<div class=\"span10\">";
+        body += "<h5>Username - Receipt List </h5>";
+        body += "</div>";
+        body += "</div>	";
+        body += "<div class=\"row-fluid\">";
+        body += "<div class=\"span10 offset1\">";
+        body += "<table class=\"table table-striped\">";
+        body += "<thead>";
+        body += "<tr>";
+        body += "<td>ID</td><td>RECEIPT</td><td>PRICE</td><td>DATE</td></b>";
+        body += "</tr>";
+        body += "</thead>";
+        body += "<tbody>";
+        /*
+         * Inizio del ciclo per popolare la tabella delle ricevute
+         * "<tr>";
+         *  body += "<td>0100</td><td><a href='#'>url receipt</a></td><td>55e</td><td>10/12/2012</td>";
+         *  body += "</tr>			
+         */
+        body += "<tr>";
+        body += "<td>0100</td><td><a href='#'>url receipt</a></td><td>55e</td><td>10/12/2012</td>";
+        body += "</tr>							";
+        body += "</tbody>";
+        body += "</table>";
+        body += "</div>";
+        body += "</div>	";
+        body += "<!-- end of row-fluid -->";
+        body += "</div>";
+        body += "<!-- end of container-fluid -->";
 
         page.addContent(body);
 

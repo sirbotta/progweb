@@ -5,17 +5,21 @@
         <param-value>jdbc:derby://localhost:1527/jbp</param-value>
     </context-param>
     <filter>
-        <filter-name>sessionFilter</filter-name>
-        <filter-class>filters.sessionFilter</filter-class>
-    </filter>
-    <filter>
         <filter-name>receiptFilter</filter-name>
         <filter-class>filters.receiptFilter</filter-class>
     </filter>
-    <filter-mapping>
-        <filter-name>receiptFilter</filter-name>
-        <url-pattern>/receipt</url-pattern>
-    </filter-mapping>
+    <filter>
+        <filter-name>sellerFilter</filter-name>
+        <filter-class>filters.sellerFilter</filter-class>
+    </filter>
+    <filter>
+        <filter-name>buyerFilter</filter-name>
+        <filter-class>filters.buyerFilter</filter-class>
+    </filter>
+     <filter>
+        <filter-name>sessionFilter</filter-name>
+        <filter-class>filters.sessionFilter</filter-class>
+    </filter>
     <filter-mapping>
         <filter-name>sessionFilter</filter-name>
         <servlet-name>Logout</servlet-name>
@@ -26,6 +30,23 @@
         <servlet-name>ShowProductsSeller</servlet-name>
         <servlet-name>AddProduct</servlet-name>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>buyerFilter</filter-name>
+        <servlet-name>LandingBuyer</servlet-name>
+        <servlet-name>LandingBuyer</servlet-name>
+        <servlet-name>ShowProductsBuyer</servlet-name>
+        <servlet-name>Confirm</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>sellerFilter</filter-name>
+        <servlet-name>LandingSeller</servlet-name>
+        <servlet-name>ShowProductsSeller</servlet-name>
+        <servlet-name>AddProduct</servlet-name>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>receiptFilter</filter-name>
+        <url-pattern>/receipt</url-pattern>
+    </filter-mapping> 
     <listener>
         <description>ServletContextListener</description>
         <listener-class>listeners.WebappContextListener</listener-class>

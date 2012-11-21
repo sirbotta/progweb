@@ -67,6 +67,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", user);
             session.setAttribute("username", username);
             session.setAttribute("user_id", user.getId());
+            session.setAttribute("role", user.getRole());
             // mando un redirect alla servlet che carica i prodotti
             if ("buyer".equals(user.getRole())) {
                 response.sendRedirect(request.getContextPath() + "/Buyer");

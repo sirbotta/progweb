@@ -16,3 +16,9 @@ INSERT INTO USERS (username,password,role) VALUES
 
 INSERT INTO PRODUCTS (name,seller_id,category_id,quantity,um,price,date_timeinsert,url_image) VALUES 
 ('Carota',3,1,10,'KG',5,'2012-11-19','http://www.franciavincenzo.altervista.org/casa/IMMAGINI/carota.jpg'); 
+
+
+
+
+INSERT INTO APP.ORDERS (DATE_TIMESTAMP, PRODUCT_ID, BUYER_ID, QUANTITY, TOTAL_PRICE, URL_RECEIPT) 
+	VALUES (CURRENT_DATE, 3, 5, 10, 15.0, 'ddfdf')

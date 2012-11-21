@@ -15,7 +15,23 @@ public class Order implements Serializable{
     int id, quantity;
     double totalPrice;
     Date date;
-    String product, buyer, urlReceipt;
+    String product, buyer,seller, urlReceipt, um;
+
+    public String getUm() {
+        return um;
+    }
+
+    public void setUm(String um) {
+        this.um = um;
+    }
+
+    public String getSeller() {
+        return seller;
+    }
+
+    public void setSeller(String seller) {
+        this.seller = seller;
+    }
 
     public int getId() {
         return id;

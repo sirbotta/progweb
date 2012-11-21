@@ -45,8 +45,7 @@ public class ShowProductsBuyerServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws SQLException,ServletException, IOException  {
-        String categoria = request.getParameter("cat");
-        List<Product> prodotti = manager.getProductsByCategory(categoria);
+        List<Product> prodotti = manager.getProductsByCategory(Integer.parseInt(request.getParameter("cat")));
         
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();

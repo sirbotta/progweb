@@ -38,3 +38,7 @@ input{
 thead{
 	font-weight: bold;
 }
+
+p{
+	font-weight: normal;
+}

@@ -97,7 +97,7 @@ public class DBManager implements Serializable {
     
     public Category getCategoryById(int category_id) throws SQLException {
         Category c = new Category();
-        PreparedStatement stm = con.prepareStatement("SELECT * FROM category"
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM category "
                 + "WHERE id = ?");
         stm.setInt(1, category_id);
         

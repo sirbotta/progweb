@@ -46,88 +46,56 @@ public class ConfirmProductsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException, SQLException {
         
-        List<Product> prodotti = manager.getProductsByCategory(1);
-        
+        Product prodotto = manager.getProductById(Integer.parseInt(request.getParameter("product")));        
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
         
         PageHelper page = new PageHelper("Products - buyer");
         
         String body = "";
-        body += "<div class=\"container-fluid\" >";
-        body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span12\"></div>";
+        body += "<div class='container-fluid' >";
+        body += "<div class='row-fluid'>";
+        body += "<div class='span12'></div>";
         body += "</div>";
-        body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span3\">"
-                +"<a href="+ getServletContext().getContextPath()+"/Buyer" +">Home</a>\n"
-                + "</div>";
-        body += "<div class=\"span6\">";
-        body += "<h1>Category</h1>";
+        body += "<div class='row-fluid'>";
+        body += "<div class='span3'>";
+        body += "<a href='"+ getServletContext().getContextPath()+"/Buyer" +"'>Home</a>";
         body += "</div>";
-        body += "<div class=\"span3\">\n";
-        body += "<a href="+ getServletContext().getContextPath()+"/Logout" +">Sign out</a>\n";
-        body += "</div>\n";
-        body += "</div>\n";
-        body += "<div class=\"row-fluid\">\n";
-        body += "<div class=\"span2\"></div>\n";
-        body += "<div class=\"span8\" id=\"scana\">\n";
-        body += "<div class=\"tabbable tabs-left\">\n";
-        body += "<ul class=\"nav nav-tabs\">\n";
-        /*
-         * Il ciclo scorre i prodotti ottenuti dal db manager
-         * e crea un <li><a href=\"#tabN\" data-toggle=\"tab\">NomeProdotto</a></li> 
-         * per ogni prodotto trovato
-         */
-        int c=1;
-        for(Product prodotto:prodotti){
-            body += "<li><a href='#tab"+ c +"' data-toggle='tab'>"+ prodotto.getName() +"</a></li>\n";
-            c++;
-        }
-        c=1;
-        body += "</ul>\n";
-        /*
-         * Inizio il ciclo per le informazioni dei songoli prodotti
-         *  body += "<div class=\"tab-pane\" id=\"tab1\">\n";
-         *      body += "<div class=\"span9\">\n";
-         *          body += "<h5>Prezzo</h5>\n";
-         *          body += "<p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>\n";
-         *         body += "</div>\n";
-         *  body += "<img src=\"frutta.jpg\" alt=\"\" class=\"img span3\">\n";
-         * 
-         */
-        body += "<div class=\"tab-content\">\n";
-        for(Product prodotto:prodotti){
-            body += "<div class=\"tab-pane\" id='tab"+ c +"'>\n";
-            body += "<div class=\"span9\">\n";
-            body += "<h5>Prezzo "+ prodotto.getPrice() +"&#128;</h5>\n";
-            body += "<p>Disonibili "+ prodotto.getQuantity()+" "+ prodotto.getUm() +"<br>"
-                    + "Venditore "
-                    + prodotto.getUser()
-                    +"<br><br>";
-                    
-            if( prodotto.getQuantity()==0 ){
-                body += "PRODOTTO NON DISPONIBILE";
-            }
-            else{
-                body += "<a href='"
-                        + getServletContext().getContextPath()+
-                        "/Confirm?product="+ prodotto.getId()
-                        +"'><button class='btn btn-mini'>Compra</button></a>";                        
-            }
-            body += "</p></div>\n";
-            body += "<img src='"+ prodotto.getUrlImage() +"' alt=\"\" class=\"img span3\">\n";
-            body += "</div>\n";
-            c++;
-        }       
-  
-        body += "</div>\n";                
-        body += "<div class=\"span2\"></div>\n";
-        body += "</div>\n";
-        body += "<!-- end of row-fluid -->\n";
-        body += "</div>\n";
-        body += "<!-- end of container-fluid -->\n";
-
+        body += "<div class='span6'>";
+        body += "<h1>Conferma Ordine</h1>";
+        body += "</div>";
+        body += "<div class='span3'>";
+        body += "<a href='#'>Sign out</a>";
+        body += "</div>";
+        body += "</div>";
+        body += "<div class='row-fluid'>";
+        body += "<div class='span2'></div>";
+        body += "<div class='span8' >";
+        body += "<h5>"+ prodotto.getName() +"<h5>";
+        body += "</div>";
+        body += "<div class='span2'></div>";
+        body += "</div>";
+        body += "<!-- end of row-fluid -->";
+        body += "<div class='row-fluid'>";
+        body += "<div class='span3'></div>";
+        body += "<div class='span6' >";
+        body += "<p>Quantit&agrave;:"+ prodotto.getQuantity()+" "+ prodotto.getUm() +"</p>";
+        body += "<p>Venditore: "+ prodotto.getUser() +"</p>";
+        body += "<p>Prezzo totale: "+ prodotto.getPrice() +"&#8364;</p>";
+        body += "</div>";
+        body += "<div class='span3'></div>";
+        body += "</div>";
+        body += "<!-- end of row-fluid -->";
+        body += "</div>";
+        body += "<!-- end of container-fluid -->";
+        body += "<div class='row-fluid'>";
+        body += "<div class='span8'></div>";
+        body += "<div class='span2' >";
+        body += "<a href='#'><button class='btn btn-small' >Invia</button></a>";
+        body += "</div>";
+        body += "<div class='span2'></div>";
+        body += "</div>";
+        body += "<!-- end of row-fluid -->";
         page.addContent(body);
         
         try {

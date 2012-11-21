@@ -63,7 +63,7 @@ public class ShowProductsBuyerServlet extends HttpServlet {
                 +"<a href="+ getServletContext().getContextPath()+"/Buyer" +">Home</a>\n"
                 + "</div>";
         body += "<div class=\"span6\">";
-        body += "<h1>Category</h1>";
+        body += "<h1>"+ manager.getCategoryById(Integer.parseInt(request.getParameter("cat"))).getName() +"</h1>";
         body += "</div>";
         body += "<div class=\"span3\">\n";
         body += "<a href="+ getServletContext().getContextPath()+"/Logout" +">Sign out</a>\n";

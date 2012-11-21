@@ -95,6 +95,34 @@ public class DBManager implements Serializable {
         return categoryList;
     }
     
+    public Category getCategoryById(int category_id) throws SQLException {
+        Category c = new Category();
+        PreparedStatement stm = con.prepareStatement("SELECT * FROM category"
+                + "WHERE id = ?");
+        stm.setInt(1, category_id);
+        
+        try {
+            ResultSet rs = stm.executeQuery();
+            try {
+                if (rs.next()) {
+                    
+                    c.setId(rs.getInt("id"));
+                    c.setName(rs.getString("name"));
+                    return c;
+                }else
+                {
+                    return null;
+                }
+            } finally {
+                rs.close();
+            }
+        } finally {
+            stm.close();
+        }
+        
+    }
+    
+    
     public Product getProductById(int product_id) throws SQLException {
         Product p = new Product();
         PreparedStatement stm = con.prepareStatement(

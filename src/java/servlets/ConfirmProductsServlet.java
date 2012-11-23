@@ -91,7 +91,7 @@ public class ConfirmProductsServlet extends HttpServlet {
         body += "<div class='row-fluid'>";
         body += "<div class='span8'></div>";
         body += "<div class='span2' >";
-        body += "<a href='#'><button class='btn btn-small' >Invia</button></a>";
+        body += "<a href='"+ getServletContext().getContextPath()+"/ProcessOrder?product_id="+prodotto.getId()+"'><button class='btn btn-small' >Invia</button></a>";
         body += "</div>";
         body += "<div class='span2'></div>";
         body += "</div>";

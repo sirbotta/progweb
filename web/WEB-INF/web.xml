@@ -16,7 +16,7 @@
         <filter-name>buyerFilter</filter-name>
         <filter-class>filters.buyerFilter</filter-class>
     </filter>
-     <filter>
+    <filter>
         <filter-name>sessionFilter</filter-name>
         <filter-class>filters.sessionFilter</filter-class>
     </filter>
@@ -46,7 +46,7 @@
     <filter-mapping>
         <filter-name>receiptFilter</filter-name>
         <url-pattern>/receipt</url-pattern>
-    </filter-mapping> 
+    </filter-mapping>
     <listener>
         <description>ServletContextListener</description>
         <listener-class>listeners.WebappContextListener</listener-class>
@@ -83,6 +83,14 @@
         <servlet-name>AddProduct</servlet-name>
         <servlet-class>servlets.AddProductServlet</servlet-class>
     </servlet>
+    <servlet>
+        <servlet-name>ProcessOrder</servlet-name>
+        <servlet-class>servlets.ProcessOrderServlet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>InsertProduct</servlet-name>
+        <servlet-class>servlets.InsertProductServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
         <url-pattern>/Login</url-pattern>
@@ -114,6 +122,14 @@
     <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>
         <url-pattern>/AddProduct</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProcessOrder</servlet-name>
+        <url-pattern>/ProcessOrder</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>InsertProduct</servlet-name>
+        <url-pattern>/InsertProduct</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

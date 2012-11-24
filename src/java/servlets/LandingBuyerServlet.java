@@ -25,7 +25,7 @@ import javax.servlet.http.HttpSession;
  */
 //pagina iniziale per un buyer dopo essersi loggato, mostra le categorie dei prodotti e gli ordini precedenti
 public class LandingBuyerServlet extends HttpServlet {
-    
+
     private DBManager manager;
 
     @Override
@@ -49,14 +49,14 @@ public class LandingBuyerServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         List<Category> categorie = manager.getCategories();
         HttpSession session = request.getSession(false);
-        List<Order> ordini = manager.getOrdersByBuyer( Integer.parseInt(session.getAttribute("user_id").toString()) );
+        List<Order> ordini = manager.getOrdersByBuyer(Integer.parseInt(session.getAttribute("user_id").toString()));
         PrintWriter out = response.getWriter();
         PageHelper page = new PageHelper("Landing page - Buyer");
         String body = "";
         body += "<div class=\"container-fluid\" >\n";
         body += "<div class=\"row-fluid\">\n";
         body += "<div class=\"span4\">"
-                +"<a href="+ getServletContext().getContextPath()+"/Buyer" +">Home</a>\n"
+                + "<a href=" + getServletContext().getContextPath() + "/Buyer" + ">Home</a>\n"
                 + "</div>";
         body += "<div class=\"span6 \">\n";
         body += "<h1>\n";
@@ -64,7 +64,7 @@ public class LandingBuyerServlet extends HttpServlet {
         body += "</h1>\n";
         body += "</div>\n";
         body += "<div class=\"span2\">\n";
-        body += "<a href="+ getServletContext().getContextPath()+"/Logout" +">Sign out</a>\n";
+        body += "<a href=" + getServletContext().getContextPath() + "/Logout" + ">Sign out</a>\n";
         body += "</div>\n";
         body += "</div>\n";
         body += "<!-- end of row-fluid -->\n";
@@ -87,16 +87,16 @@ public class LandingBuyerServlet extends HttpServlet {
          * Inizio del ciclo per mostrare le categorie
          * <li><a href=\"">Categoria</a></li>
          */
-        for(Category categoria:categorie){
-                String relPath = "ProductsBuyer?cat=" + categoria.getId();                        
-                body+="<li>"
-                        + "<a href='"
-                        + getServletContext().getContextPath()+"/"+relPath
-                        + "'>"
-                        + categoria.getName()
-                        +"</a>"
-                        + "</li>\n";
-            }            
+        for (Category categoria : categorie) {
+            String relPath = "ProductsBuyer?cat=" + categoria.getId();
+            body += "<li>"
+                    + "<a href='"
+                    + getServletContext().getContextPath() + "/" + relPath
+                    + "'>"
+                    + categoria.getName()
+                    + "</a>"
+                    + "</li>\n";
+        }
         /*
          * fine del ciclo
          */
@@ -107,15 +107,31 @@ public class LandingBuyerServlet extends HttpServlet {
         body += "</div>\n";
         body += "</div>\n";
         body += "</div>\n";
-        body += "<!-- end of row-fluid -->\n"; 
+        body += "<!-- end of row-fluid -->\n";
+
+
+        String message = (String) request.getAttribute("message");
+        String type = (String) request.getAttribute("message_type");
+
+        if (message != null) {
+            body += "<div class=\"row-fluid\">";
+            body += "<div class=\"span6 offset1\">";
+            body += "<span class=\"label label-" + type + "\"> " + message + "</span>";
+            body += "</div>";
+            // body += "<div class=\"span1\"></div>";
+            body += "</div>";
+            body += "<!-- end of row-fluid -->\n";
+        }
+
         body += "<div class=\"row-fluid\">";
         body += "<div class=\"span2\"></div>";
         body += "<div class=\"span10\">";
-        body += "<h5>"+ session.getAttribute("username") +" - Receipt List </h5>";
-        if(!ordini.isEmpty()){
-            
-            body += "</div>";
-            body += "</div>	";
+        body += "<h5>" + session.getAttribute("username") + " - Receipt List </h5>";
+        body += "</div>";
+        body += "</div>";
+        if (!ordini.isEmpty()) {
+
+
             body += "<div class=\"row-fluid\">";
             body += "<div class=\"span10 offset1\">";
             body += "<table class=\"table table-striped\">";
@@ -131,22 +147,26 @@ public class LandingBuyerServlet extends HttpServlet {
              *      <td>0100</td><td><a href='#'>url receipt</a></td><td>55e</td><td>10/12/2012</td>
              *  </tr>			
              */
-            for(Order ordine:ordini){
-                body +="<tr>";
-                body +="<td>"+ ordine.getId() +"</td>"
-                        + "<td><a href='"+ ordine.getUrlReceipt() +"'>Ricevuta</a></td>"
-                        + "<td>"+ ordine.getTotalPrice() +"&#128;</td>"
-                        + "<td>"+ ordine.getDate() +"</td>";
-                body +="</tr>";
+            for (Order ordine : ordini) {
+                body += "<tr>";
+                body += "<td>" + ordine.getId() + "</td>"
+                        + "<td><a href='" + ordine.getUrlReceipt() + "'>Ricevuta</a></td>"
+                        + "<td>" + ordine.getTotalPrice() + "&#128;</td>"
+                        + "<td>" + ordine.getDate() + "</td>";
+                body += "</tr>";
             }
             body += "</tbody>";
             body += "</table>";
-        }
-        else{
+        } else {
+            body += "<div class=\"row-fluid\">";
+            body += "<div class=\"span10 offset1\">";
             body += "<p>Nessuna ricevuta disponibile</p>";
+            body += "</div>";
+            body += "</div>";
+
         }
         body += "</div>";
-        body += "</div>	";
+        body += "</div>";
         body += "<!-- end of row-fluid -->";
         body += "</div>";
         body += "<!-- end of container-fluid -->";

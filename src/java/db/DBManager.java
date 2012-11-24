@@ -242,7 +242,8 @@ public class DBManager implements Serializable {
                 + "INNER JOIN products on products.ID=orders.PRODUCT_ID "
                 + "INNER JOIN users as buyers on orders.BUYER_ID=buyers.id "
                 + "INNER JOIN users as sellers on products.SELLER_ID=sellers.id "
-                + "WHERE products.SELLER_ID = ?");
+                + "WHERE products.SELLER_ID = ?"
+                + "ORDER BY orders.DATE_TIMESTAMP DESC");
 
         stm.setInt(1, seller_id);
         try {
@@ -279,7 +280,8 @@ public class DBManager implements Serializable {
                 + "INNER JOIN products on products.ID=orders.PRODUCT_ID "
                 + "INNER JOIN users as buyers on orders.BUYER_ID=buyers.id "
                 + "INNER JOIN users as sellers on products.SELLER_ID=sellers.id "
-                + "WHERE orders.BUYER_ID = ?");
+                + "WHERE orders.BUYER_ID = ?"
+                + "ORDER BY orders.DATE_TIMESTAMP DESC");
 
         stm.setInt(1, buyer_id);
         try {

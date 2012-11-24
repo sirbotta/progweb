@@ -100,10 +100,10 @@ public class LandingSellerServlet extends HttpServlet {
             body += "<div class='span9'>";
             body += "<h5>Prezzo "+ prodotto.getPrice() +"&#128;</h5>";
             body += "<p>";
-            body += "Disonibili "+ prodotto.getQuantity() +" "+ prodotto.getUm() +"<br>";
+            body += "Disponibili "+ prodotto.getQuantity() +" "+ prodotto.getUm() +"<br>";
             body += "</p>";
             body += "</div>";
-            body += "<img src='"+ prodotto.getUrlImage() +"' alt='' class='img span3'>";
+            body += "<img src='"+ prodotto.getUrlImage() +"' alt='' class='img-rounded span3'>";
             body += "</div>";
             c++;
         }

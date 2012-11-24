@@ -17,6 +17,9 @@ import db.DBManager;
 import db.Product;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -63,7 +66,7 @@ public class ProcessOrderServlet extends HttpServlet {
         if (p.getQuantity() != 0) {
 
             //create pdf receipt
-            String filename = "ricevuta" + Math.random() * 100 + ".pdf";
+            String filename = hashWord(buyer_id+""+product_id+""+(int)Math.random()*10000)+".pdf";
             String path = getServletContext().getRealPath("/receipts/" + filename);
             // step 1: creation of a document-object
             Document document = new Document();
@@ -71,7 +74,6 @@ public class ProcessOrderServlet extends HttpServlet {
                 // step 2:
 
                 PdfWriter.getInstance(document, new FileOutputStream(path));
-                //HtmlWriter.getInstance(document, new FileOutputStream("lists.html"));
 
 
 
@@ -80,9 +82,11 @@ public class ProcessOrderServlet extends HttpServlet {
 
                 //write bla bla blah
                 List list = new List(true, 20);
-                list.add(new ListItem("First line"));
-                list.add(new ListItem("The second line is longer to see what happens once the end of the line is reached. Will it start on a new line?"));
-                list.add(new ListItem("Third line"));
+                list.add(new ListItem(""+product_id));
+                list.add(new ListItem(""+buyer_id));
+                list.add(new ListItem(""+p.getQuantity()));
+                list.add(new ListItem(""+buyer_id));
+                list.add(new ListItem(""+p.getPrice()));
                 document.add(list);
 
             } catch (DocumentException de) {
@@ -103,16 +107,39 @@ public class ProcessOrderServlet extends HttpServlet {
             manager.removeProduct(product_id);
 
             //redirect landing page
+            
+            
+            //il forward sarebbe da evitare in questo caso anche se viene intercettata la casistica di refresh
+            //request.setAttribute("message", "Hai acquistato "+p.getQuantity()+""+p.getUm()+" di "+p.getName());
+            //request.setAttribute("message_type", "success");
+            //RequestDispatcher rd = request.getRequestDispatcher("/Buyer");
+            //rd.forward(request, response);
+            
+            
             response.sendRedirect(request.getContextPath() + "/Buyer");
 
         } else {
             //forward in caso di prodotto a zero
             request.setAttribute("message", "Il prodotto è esaurito");
-            RequestDispatcher rd = request.getRequestDispatcher("/erroreOrdine");
+            request.setAttribute("message_type", "warning");
+            RequestDispatcher rd = request.getRequestDispatcher("/Buyer");
             rd.forward(request, response);
         }
 
 
+    }
+    
+    private String hashWord(String word) {
+        String hashstring = null;
+        try {
+            MessageDigest md5 = MessageDigest.getInstance("MD5");
+            md5.update(word.getBytes());
+            BigInteger hash = new BigInteger(1, md5.digest());
+            hashstring = hash.toString(16);
+        } catch (NoSuchAlgorithmException nsae) {
+        // ignore
+        }
+        return hashstring;
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

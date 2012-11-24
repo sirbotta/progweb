@@ -116,7 +116,7 @@ public class ShowProductsBuyerServlet extends HttpServlet {
                         +"'><button class='btn btn-mini'>Compra</button></a>";                        
             }
             body += "</p></div>\n";
-            body += "<img src='"+ prodotto.getUrlImage() +"' alt=\"\" class=\"img span3\">\n";
+            body += "<img src='"+ prodotto.getUrlImage() +"' alt=\"\" class=\"img-roundedspan3\">\n";
             body += "</div>\n";
             c++;
         }       

@@ -112,6 +112,7 @@ public class sessionFilter implements Filter {
         try {
              HttpSession session = ((HttpServletRequest) request).getSession(false);
             if (session == null || session.getAttribute("user") == null) {
+                //uso forward perchè sessioneFilter è mappato solo su servlet con context, su path usare redirect
                 filterConfig.getServletContext().getRequestDispatcher("/").forward(request, response);
             } else {
                 chain.doFilter(request, response);

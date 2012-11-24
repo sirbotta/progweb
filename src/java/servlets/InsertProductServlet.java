@@ -43,14 +43,14 @@ public class InsertProductServlet extends HttpServlet {
             throws ServletException, IOException, SQLException {
         HttpSession session = request.getSession(false);
         int seller_id = Integer.parseInt(session.getAttribute("user_id").toString());
-        String product_name = request.getParameter("product_name");
-        int category_id = Integer.parseInt(request.getParameter("category_id"));
-        int quantity = Integer.parseInt(request.getParameter("quantity"));
-        String UM = request.getParameter("UM");
+        String product_name = request.getParameter("product");
+        int category_id = Integer.parseInt(request.getParameter("cat_id"));
+        int quantity = Integer.parseInt(request.getParameter("qnt"));
+        String UM = request.getParameter("um");
         Double price = Double.parseDouble(request.getParameter("price"));
+        String image_url = request.getParameter("img_url");
 
-
-        manager.addProduct(product_name, seller_id, category_id, quantity, UM, price, "URL_IMAGE");
+        manager.addProduct(product_name, seller_id, category_id, quantity, UM, price, image_url);
 
         response.sendRedirect(request.getContextPath() + "/Seller");
 

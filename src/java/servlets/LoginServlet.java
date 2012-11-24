@@ -56,7 +56,8 @@ public class LoginServlet extends HttpServlet {
 
         if (user == null) {
             request.setAttribute("message", "Username/password non esistente !");
-            RequestDispatcher rd = request.getRequestDispatcher("/errorelogin");
+            request.setAttribute("message_type", "warning");
+            RequestDispatcher rd = request.getRequestDispatcher("/");
             rd.forward(request, response);
         } else {
 

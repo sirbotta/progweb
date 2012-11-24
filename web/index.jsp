@@ -29,7 +29,7 @@
             <div class='row-fluid'>
                 <div class='span6 offset3'>
                     <h1>
-                        SiteName
+                        ProxiFarmer
                     </h1>
                 </div>
             </div>			
@@ -37,7 +37,17 @@
             <div class='row-fluid'>
                 <div class='span6 offset3'>
                     <form action="Login" method="POST">
-                        <label>Login</label>
+                        <label>Login
+                        <%
+                            String message = (String) request.getAttribute("message");
+                            String type = (String) request.getAttribute("message_type");
+
+                            if (message != null) {
+                                out.print("<span class=\"label label-"+type+"\"> "+message+"</span>");
+                            }
+                            
+                        %>
+                        </label>
                         <input type='text' placeholder='username' name='username'>
                         <input type='password' placeholder='password' name='password'>
                         <label class='checkbox'>

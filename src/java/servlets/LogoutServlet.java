@@ -39,6 +39,7 @@ public class LogoutServlet extends HttpServlet {
         session.invalidate();
 
         request.setAttribute("message", "Logout effettuato con successo");
+        request.setAttribute("message_type", "success");
         // rimando al login
         RequestDispatcher rd = request.getRequestDispatcher("/");
         rd.forward(request, response);

@@ -28,8 +28,8 @@ select{
     background-color: transparent !important;
 }
 .img{
-	max-width: 200px;
-	max-height: 200px;
+	max-width: 300px;
+	max-height: 300px;
 	float: right;
 }
 .table-striped tbody tr:nth-child(2n+1) td, .table-striped tbody tr:nth-child(2n+1) th {

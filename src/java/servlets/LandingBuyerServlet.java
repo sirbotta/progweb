@@ -55,7 +55,7 @@ public class LandingBuyerServlet extends HttpServlet {
         String body = "";
         body += "<div class=\"container-fluid\" >\n";
         body += "<div class=\"row-fluid\">\n";
-        body += "<div class=\"span4\">"
+        body += "<div class=\"span3 offset1\">"
                 + "<a href=" + getServletContext().getContextPath() + "/Buyer" + ">Home</a>\n"
                 + "</div>";
         body += "<div class=\"span6 \">\n";
@@ -150,7 +150,7 @@ public class LandingBuyerServlet extends HttpServlet {
             for (Order ordine : ordini) {
                 body += "<tr>";
                 body += "<td>" + ordine.getId() + "</td>"
-                        + "<td><a href='" + ordine.getUrlReceipt() + "'>Ricevuta</a></td>"
+                        + "<td><a href='" + getServletContext().getContextPath() + "/receipts/"+ordine.getUrlReceipt() + "'>Ricevuta</a></td>"
                         + "<td>" + ordine.getTotalPrice() + "&#128;</td>"
                         + "<td>" + ordine.getDate() + "</td>";
                 body += "</tr>";

@@ -27,7 +27,7 @@ import javax.servlet.http.HttpSession;
  */
 //pagine iniziale per un seller dopo essersi loggato
 public class LandingSellerServlet extends HttpServlet {
-    
+
     private DBManager manager;
 
     @Override
@@ -55,27 +55,27 @@ public class LandingSellerServlet extends HttpServlet {
         List<Product> prodotti = manager.getProductsBySeller(Integer.parseInt(session.getAttribute("user_id").toString()));
         List<Order> ricevute = manager.getOrdersBySeller(Integer.parseInt(session.getAttribute("user_id").toString()));
 
-        
+
         String body = "";
-        
+
         body += "<div class='container-fluid' >\n";
-        body += "<div class='row-fluid'>\n";
-        body += "<div class='span12'></div>\n";
-        body += "</div>\n";
+        //body += "<div class='row-fluid'>\n";
+        //body += "<div class='span12'></div>\n";
+        //body += "</div>\n";
         body += "<div class='row-fluid'>";
-        body += "<div class='span2'>";
-        body += "<a href='"+ getServletContext().getContextPath()+"/Seller" +"'>Home</a>";
+        body += "<div class='span3 offset1'>";
+        body += "<a href='" + getServletContext().getContextPath() + "/Seller" + "'>Home</a>";
         body += "</div>";
         body += "<div class='span6'>";
-        body += "<h3>"+ session.getAttribute("username") +"'s - Products</h3>";
+        body += "<h2>" + session.getAttribute("username") + "'s - Products</h2>";
         body += "</div>";
-        body += "<div class='span4'>";
-        body += "<a href='"+ getServletContext().getContextPath()+"/Logout" +"'>Sign out</a>";
+        body += "<div class='span2'>";
+        body += "<a href='" + getServletContext().getContextPath() + "/Logout" + "'>Sign out</a>";
         body += "</div>";
         body += "</div>";
         body += "<div class='row-fluid'>";
-        body += "<div class='span2'></div>";
-        body += "<div class='span8' id='scana'>";
+        body += "<div class='span1'></div>";
+        body += "<div class='span10' id='scana'>";
         body += "<div class='tabbable tabs-left'>";
         body += "<ul class='nav nav-tabs'>";
         /*
@@ -83,32 +83,43 @@ public class LandingSellerServlet extends HttpServlet {
          * dall'utente
          * <li><a href='#tabN' data-toggle='tab'>Fasoli</a></li> 
          */
-        int c=1;
-        for(Product prodotto:prodotti ){
-            body += "<li><a href='#tab"+ c +"' data-toggle='tab'>"+ prodotto.getName() +"</a></li>\n";
+        int c = 1;
+        for (Product prodotto : prodotti) {
+            body += "<li><a href='#tab" + c + "' data-toggle='tab'>" + prodotto.getName() + "</a></li>\n";
             c++;
-            }
-        
-        body += "<a href="+ getServletContext().getContextPath()+"/AddProduct" 
-                +">\n";
+        }
+
+        body += "<a href=" + getServletContext().getContextPath() + "/AddProduct"
+                + ">\n";
         body += "<li><strong>Aggiungi Prodotto</strong></li></a>\n";
         body += "</ul>\n";
         body += "<div class='tab-content'>\n";
-        c=1;
-        for(Product prodotto:prodotti){
-            body += "<div class='tab-pane' id='tab"+ c +"'>";
+        c = 1;
+        for (Product prodotto : prodotti) {
+            body += "<div class='tab-pane' id='tab" + c + "'>";
             body += "<div class='span9'>";
-            body += "<h5>Prezzo "+ prodotto.getPrice() +"&#128;</h5>";
+            body += "<h5>Prezzo " + prodotto.getPrice() + "&#128;</h5>";
             body += "<p>";
-            body += "Disponibili "+ prodotto.getQuantity() +" "+ prodotto.getUm() +"<br>";
+            body += "Categoria " + prodotto.getCategory() + "<br>";
+            body += "</p>";
+            body += "<p>";
+            if (prodotto.getQuantity() != 0) {
+                body += "Disponibili " + prodotto.getQuantity() + " " + prodotto.getUm() + "<br>";
+            } else {
+                body += "Venduto <br>";
+            }
             body += "</p>";
             body += "</div>";
-            body += "<img src='"+ prodotto.getUrlImage() +"' alt='' class='img-rounded span3'>";
+            if (!prodotto.getUrlImage().isEmpty()) {
+                body += "<img src='" + getServletContext().getContextPath() + "/img/" + prodotto.getUrlImage() + "' alt='' class='img-rounded span3'>";
+            } else {
+                body += "<img src='" + getServletContext().getContextPath() + "/img/na.gif' alt='' class='img-rounded span3'>";
+            }
             body += "</div>";
             c++;
         }
         body += "</div>\n";
-        body += "<div class='span2'></div>\n";
+        body += "<div class='span1'></div>\n";
         body += "</div>\n";
         body += "<!-- end of row-fluid -->\n";
         body += "</div>\n";
@@ -117,12 +128,12 @@ public class LandingSellerServlet extends HttpServlet {
         body += "<div class='row-fluid'>\n";
         body += "<div class='span2'></div>\n";
         body += "<div class='span10'>\n";
-        body += "<h5>"+ session.getAttribute("username") +" - Order List </h5>\n";
+        body += "<h5>" + session.getAttribute("username") + " - Order List </h5>\n";
         body += "</div>\n";
         body += "</div>\n";
         body += "<!-- end of row-fluid -->\n";
         body += "<div class='row-fluid'>\n";
-        body += "<div class='span8 offset2'>\n";
+        body += "<div class='span10 offset1'>\n";
         body += "<table class='table table-striped'>\n";
         body += "<thead>\n";
         body += "<tr>\n";
@@ -136,12 +147,12 @@ public class LandingSellerServlet extends HttpServlet {
          * body += "<td>Cipolline</td><td>gino</td><td><a href='#'>url receipt</a></td><td>55e</td><td>10/12/2012</td>\n";
          * body += "</tr>\n";
          */
-        for( Order ordine:ricevute ){
+        for (Order ordine : ricevute) {
             body += "<tr>\n";
-            body += "<td>"+ ordine.getProduct() +"</td>"
-                    + "<td>"+ ordine.getBuyer() +"</td><td><a href='"+ ordine.getUrlReceipt() +"'>Ricevuta</a></td>"
-                    + "<td>"+ ordine.getTotalPrice() +"&#128;</td><td>"+ ordine.getDate() +"</td>\n";
-            body += "</tr>\n";            
+            body += "<td>" + ordine.getProduct() + "</td>"
+                    + "<td>" + ordine.getBuyer() + "</td><td><a href='" + getServletContext().getContextPath() + "/receipts/" + ordine.getUrlReceipt() + "'>Ricevuta</a></td>"
+                    + "<td>" + ordine.getTotalPrice() + "&#128;</td><td>" + ordine.getDate() + "</td>\n";
+            body += "</tr>\n";
         }
         body += "</tbody>\n";
         body += "</table>\n";
@@ -150,12 +161,12 @@ public class LandingSellerServlet extends HttpServlet {
         body += "<!-- end of row-fluid -->\n";
         body += "</div>\n";
 
-        
+
         page.addContent(body);
         try {
             /* TODO output your page here. You may use following sample code. */
             out.println(page.getFullPage());
-        } finally {            
+        } finally {
             out.close();
         }
     }

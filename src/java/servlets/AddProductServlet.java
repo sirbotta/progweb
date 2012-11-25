@@ -52,24 +52,24 @@ public class AddProductServlet extends HttpServlet {
         
         String body ="";
         body += "<div class='container-fluid' >\n";
+        //body += "<div class='row-fluid'>\n";
+        //body += "<div class='span12'></div>\n";
+        //body += "</div>\n";
         body += "<div class='row-fluid'>\n";
-        body += "<div class='span12'></div>\n";
-        body += "</div>\n";
-        body += "<div class='row-fluid'>\n";
-        body += "<div class='span3'>\n";
+        body += "<div class='span3 offset1'>\n";
         body += "<a href='"+ getServletContext().getContextPath()+"/Seller" +"'>Home</a>\n";
         body += "</div>\n";
         body += "<div class='span6'>\n";
         body += "<h2>Aggiungi Prodotto</h2>\n";
         body += "</div>\n";
-        body += "<div class='span3'>\n";
+        body += "<div class='span1'>\n";
         body += "<a href='"+ getServletContext().getContextPath()+"/Logout" +"'>Sign out</a>\n";
         body += "</div>\n";
         body += "</div>\n";
         body += "<div class='row-fluid'>\n";
         body += "<div class='span8 offset2' >\n";
         body += "<form action='"+ getServletContext().getContextPath()+"/InsertProduct" +"' method='POST' >\n";
-        body += "<h5>Aggiungi: <input type='text' placeholder='prodotto' name='product'/><h5>\n";
+        body += "<h5>Aggiungi: <input type='text' placeholder='Nome prodotto' name='product'/><h5>\n";
         body += "</div>\n";
         body += "</div>\n";
         body += "<!-- end of row-fluid -->\n";
@@ -77,7 +77,7 @@ public class AddProductServlet extends HttpServlet {
         body += "<div class='span2'></div>\n";
         body += "<div class='span10' >\n";
         body += "<p>\n";       
-        body += "<select name='cat_id'>";
+        body += "Categoria: <select name='cat_id'>";
         /*
          * Carico le categorie in cui è possibile aggiungere il prodotto
          */
@@ -87,20 +87,25 @@ public class AddProductServlet extends HttpServlet {
         body += "</select>";
         
         body += "<p>\n";
-        body += "Quantit&agrave;:<input type='text' placeholder='quantit&agrave;' class='span2' name='qnt'/>\n";
-        body += "Unit&agrave; di misura:<input type='text' placeholder='um' class='span2' name='um'/>\n";
+        body += "Quantit&agrave;: <input type='text' placeholder='0' class='span2' name='qnt'/>\n";
+        body += "<input type='text' placeholder='Unit&agrave; di misura es. \"Kg\"' class='span2' name='um'/>\n";
         body += "</p>\n";
         body += "<p>\n";
-        body += "Prezzo:<input type='text' placeholder='prezzo' class='span2' name='price'/>&#8364;\n";
+        body += "Prezzo: <input type='text' placeholder='0.00' class='span2' name='price'/> &#8364;\n";
         body += "</p>\n";
         body += "<p>\n";
-        body += "Aggiungi un link all'immagine del prodotto<br>\n";
-        body += "<input type='text' placeholder='URL' name='img_url'>\n";
+        body += "Aggiungi il nome dell'immagine del prodotto<br>\n";
+        body += "<input type='text' placeholder='example.jpg' name='img_url'>\n";
         body += "</div>\n";
         body += "<!-- end of row-fluid -->\n";
         body += "<div class='row-fluid'>\n";
-        body += "<div class='span8'></div>\n";
-        body += "<div class='span2' >\n";
+        body += "<div class='span2 offset2'>";
+        body += "<button class='btn btn-mini' onClick='history.go(-1);return true;'>Annulla</button>";
+        body += "</div>";
+        body += "<div class='span2 offset2' >\n";
+        body += "<button type='reset' class='btn btn-mini'>Resetta</button>\n";
+        body += "</div>";
+        body += "<div class='span2'>\n";
         body += "<button type='submit' class='btn btn-mini'>Conferma</button>\n";
         body += "</form>\n";
         body += "</div>\n";

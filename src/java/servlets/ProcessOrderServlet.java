@@ -9,6 +9,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.FontFactory;
+import com.itextpdf.text.Image;
 import com.itextpdf.text.List;
 import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
@@ -81,13 +82,24 @@ public class ProcessOrderServlet extends HttpServlet {
                 document.open();
 
                 //write bla bla blah
+                java.util.Date today = new java.util.Date();
+                
                 List list = new List(true, 20);
                 list.add(new ListItem(""+product_id));
                 list.add(new ListItem(""+buyer_id));
                 list.add(new ListItem(""+p.getQuantity()));
                 list.add(new ListItem(""+buyer_id));
                 list.add(new ListItem(""+p.getPrice()));
-                document.add(list);
+                
+                document.add(new Paragraph("Ricevuta - Data "+ today.toString()));
+                document.add(new Paragraph("Prodotto: "+ p.getName()+" | Categoria:"+p.getCategory()));
+                Image jpg = Image.getInstance(getServletContext().getRealPath("/img/"+p.getUrlImage()));
+                document.add(jpg);
+                document.add(new Paragraph("Venditore: "+ p.getUser()));
+                document.add(new Paragraph("Quantità: "+ p.getQuantity()));
+                document.add(new Paragraph("Prezzo Totale: "+ p.getPrice()));
+                
+                
 
             } catch (DocumentException de) {
                 System.err.println(de.getMessage());
@@ -100,7 +112,7 @@ public class ProcessOrderServlet extends HttpServlet {
 
 
             //creare l'ordine
-            manager.createOrder(product_id, buyer_id, p.getQuantity(), p.getPrice(), "receipts/" + filename);
+            manager.createOrder(product_id, buyer_id, p.getQuantity(), p.getPrice(), filename);
 
             //rimuovere il prodotto (metterlo a 0)
 

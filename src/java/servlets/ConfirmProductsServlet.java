@@ -53,17 +53,17 @@ public class ConfirmProductsServlet extends HttpServlet {
         
         String body = "";
         body += "<div class='container-fluid' >";
+        //body += "<div class='row-fluid'>";
+        //body += "<div class='span12'></div>";
+        //body += "</div>";
         body += "<div class='row-fluid'>";
-        body += "<div class='span12'></div>";
-        body += "</div>";
-        body += "<div class='row-fluid'>";
-        body += "<div class='span3'>";
+        body += "<div class='span3 offset1'>";
         body += "<a href='"+ getServletContext().getContextPath()+"/Buyer" +"'>Home</a>";
         body += "</div>";
         body += "<div class='span6'>";
         body += "<h1>Conferma Ordine</h1>";
         body += "</div>";
-        body += "<div class='span3'>";
+        body += "<div class='span1'>";
         body += "<a href='#'>Sign out</a>";
         body += "</div>";
         body += "</div>";
@@ -89,7 +89,7 @@ public class ConfirmProductsServlet extends HttpServlet {
         body += "<!-- end of container-fluid -->";
         body += "<div class='row-fluid'>";
         body += "<div class='span2 offset2'>";
-        body += "<button class='btn btn-small' onClick='history.go(-1);return true;' >Anulla Ordine</button>";
+        body += "<button class='btn btn-small' onClick='history.go(-1);return true;'>Annulla</button>";
         body += "</div>";
         body += "<div class='span2 offset4' >";
         body += "<a href='"+ getServletContext().getContextPath()+"/ProcessOrder?product_id="+prodotto.getId()+"'><button class='btn btn-small' >Compra</button></a>";

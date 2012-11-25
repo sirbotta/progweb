@@ -55,23 +55,23 @@ public class ShowProductsBuyerServlet extends HttpServlet {
         
         String body = "";
         body += "<div class=\"container-fluid\" >";
+        //body += "<div class=\"row-fluid\">";
+        //body += "<div class=\"span12\"></div>";
+        //body += "</div>";
         body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span12\"></div>";
-        body += "</div>";
-        body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span3\">"
+        body += "<div class=\"span3 offset1\">"
                 +"<a href="+ getServletContext().getContextPath()+"/Buyer" +">Home</a>\n"
                 + "</div>";
         body += "<div class=\"span6\">";
         body += "<h1>"+ manager.getCategoryById(Integer.parseInt(request.getParameter("cat"))).getName() +"</h1>";
         body += "</div>";
-        body += "<div class=\"span3\">\n";
+        body += "<div class=\"span2\">\n";
         body += "<a href="+ getServletContext().getContextPath()+"/Logout" +">Sign out</a>\n";
         body += "</div>\n";
         body += "</div>\n";
         body += "<div class=\"row-fluid\">\n";
-        body += "<div class=\"span2\"></div>\n";
-        body += "<div class=\"span8\" id=\"scana\">\n";
+        body += "<div class=\"span1\"></div>\n";
+        body += "<div class=\"span10\" id=\"scana\">\n";
         body += "<div class=\"tabbable tabs-left\">\n";
         body += "<ul class=\"nav nav-tabs\">\n";
         /*
@@ -116,13 +116,17 @@ public class ShowProductsBuyerServlet extends HttpServlet {
                         +"'><button class='btn btn-mini'>Compra</button></a>";                        
             }
             body += "</p></div>\n";
-            body += "<img src='"+ prodotto.getUrlImage() +"' alt=\"\" class=\"img-roundedspan3\">\n";
+            if (!prodotto.getUrlImage().isEmpty()) {
+                body += "<img src='" + getServletContext().getContextPath() + "/img/"+prodotto.getUrlImage() + "' alt='' class='img-rounded span3'>";
+            } else {
+                body += "<img src='" + getServletContext().getContextPath() + "/img/na.gif' alt='' class='img-rounded span3'>";
+            }
             body += "</div>\n";
             c++;
         }       
   
         body += "</div>\n";                
-        body += "<div class=\"span2\"></div>\n";
+        body += "<div class=\"span1\"></div>\n";
         body += "</div>\n";
         body += "<!-- end of row-fluid -->\n";
         body += "</div>\n";

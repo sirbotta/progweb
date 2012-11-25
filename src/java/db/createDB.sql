@@ -1,7 +1,7 @@
-drop table orders
-drop table products
-drop table category
-drop table users
+drop table orders;
+drop table products;
+drop table category;
+drop table users;
 
 create table USERS (
 id INT  NOT NULL GENERATED ALWAYS AS IDENTITY (START WITH 1,

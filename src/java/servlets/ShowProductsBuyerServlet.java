@@ -55,18 +55,16 @@ public class ShowProductsBuyerServlet extends HttpServlet {
         
         String body = "";
         body += "<div class=\"container-fluid\" >";
-        //body += "<div class=\"row-fluid\">";
-        //body += "<div class=\"span12\"></div>";
-        //body += "</div>";
-        body += "<div class=\"row-fluid\">";
-        body += "<div class=\"span3 offset1\">"
-                +"<a href="+ getServletContext().getContextPath()+"/Buyer" +">Home</a>\n"
-                + "</div>";
-        body += "<div class=\"span6\">";
-        body += "<h1>"+ manager.getCategoryById(Integer.parseInt(request.getParameter("cat"))).getName() +"</h1>";
-        body += "</div>";
-        body += "<div class=\"span2\">\n";
-        body += "<a href="+ getServletContext().getContextPath()+"/Logout" +">Sign out</a>\n";
+        body += "<div class='row-fluid'>\n";
+        body += "<div class='span1'></div>\n";
+        body += "<div class='span2'>\n";
+        body += "<a href='"+ getServletContext().getContextPath()+"/Seller" +"'>Home</a>\n";
+        body += "</div>\n";
+        body += "<div class='span5'>\n";
+        body += "<h2>"+ manager.getCategoryById(Integer.parseInt(request.getParameter("cat"))).getName() +"</h2>\n";
+        body += "</div>\n";
+        body += "<div class='span4'>\n";
+        body += "<a href='"+ getServletContext().getContextPath()+"/Logout" +"'>Sign out</a>\n";
         body += "</div>\n";
         body += "</div>\n";
         body += "<div class=\"row-fluid\">\n";

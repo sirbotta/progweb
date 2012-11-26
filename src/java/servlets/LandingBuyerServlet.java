@@ -54,20 +54,18 @@ public class LandingBuyerServlet extends HttpServlet {
         PageHelper page = new PageHelper("Landing page - Buyer");
         String body = "";
         body += "<div class=\"container-fluid\" >\n";
-        body += "<div class=\"row-fluid\">\n";
-        body += "<div class=\"span3 offset1\">"
-                + "<a href=" + getServletContext().getContextPath() + "/Buyer" + ">Home</a>\n"
-                + "</div>";
-        body += "<div class=\"span6 \">\n";
-        body += "<h1>\n";
-        body += "ProxiFarmer\n";
-        body += "</h1>\n";
+        body += "<div class='row-fluid'>\n";
+        body += "<div class='span1'></div>\n";
+        body += "<div class='span2'>\n";
+        body += "<a href='"+ getServletContext().getContextPath()+"/Seller" +"'>Home</a>\n";
         body += "</div>\n";
-        body += "<div class=\"span2\">\n";
-        body += "<a href=" + getServletContext().getContextPath() + "/Logout" + ">Sign out</a>\n";
+        body += "<div class='span5'>\n";
+        body += "<h2>ProxiFarmer</h2>\n";
+        body += "</div>\n";
+        body += "<div class='span4'>\n";
+        body += "<a href='"+ getServletContext().getContextPath()+"/Logout" +"'>Sign out</a>\n";
         body += "</div>\n";
         body += "</div>\n";
-        body += "<!-- end of row-fluid -->\n";
         body += "<div class=\"row-fluid\">\n";
         body += "<div class=\"span10 offset1\">\n";
         body += "<div class=\"navbar\">\n";
@@ -125,9 +123,10 @@ public class LandingBuyerServlet extends HttpServlet {
 
         body += "<div class=\"row-fluid\">";
         body += "<div class=\"span2\"></div>";
-        body += "<div class=\"span10\">";
+        body += "<div class=\"span2\">";
         body += "<h5>" + session.getAttribute("username") + " - Receipt List </h5>";
         body += "</div>";
+        body += "<div class=\"span2\"></div>";
         body += "</div>";
         if (!ordini.isEmpty()) {
 

@@ -1,5 +1,30 @@
+body{
+    background-image: url('../img/header_bg.png');
+    background-repeat: no-repeat;
+    background-color: rgb(178,224,245);
+    color: #013220;
+}
+
+.container-fluid{
+    margin-top: 10em;
+}
+
+.span10,
+.span6{
+    background-color: #FFF;
+    border: 1px solid #fff  ;
+    border-radius: 4px 4px 4px 4px ;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067) ;
+}
+
+.navbar,
+.table,
+.nav{
+    margin-bottom: 0 !important;
+}
+/*
 .navbar-inner{    
-	border: 1px solid #7F705D  !important;
+    border: 1px solid #7F705D  !important;
     border-radius: 4px 4px 4px 4px !important;
     box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067) !important;
 }
@@ -9,14 +34,22 @@ select{
 	color: #fff !important;
 }
 
+a{
+    color: #013220 !important;
+}
+
 .active > a{
-	color: #FFE0BA !important;
+	color: #013220 !important;
 	font-weight: bold;
 }
 #scana{
 	border-right-color: white;
 	border-right-width: 1px;
 	border-right-style: solid;
+}
+
+nav-tabs > .active > a{
+    background-color: red !important;
 }
 
 .tabs-left > .nav-tabs > li > a {
@@ -33,7 +66,7 @@ select{
 	float: right;
 }
 .table-striped tbody tr:nth-child(2n+1) td, .table-striped tbody tr:nth-child(2n+1) th {
-    background-color: #7C684E;
+    background-color:  transparent;
 }
 
 thead{
@@ -43,3 +76,4 @@ thead{
 p{
 	font-weight: normal;
 }
+*/

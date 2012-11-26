@@ -27,7 +27,7 @@
     <body>
         <div class='container-fluid' id='login'>
             <div class='row-fluid'>
-                <div class='span6 offset3'>
+                <div class='span4 offset4'>
                     <h1>
                         ProxiFarmer
                     </h1>
@@ -35,7 +35,7 @@
             </div>			
             <!-- end of row-fluid -->
             <div class='row-fluid'>
-                <div class='span6 offset3'>
+                <div class='span4 offset4'>
                     <form action="Login" method="POST">
                         <label>Login
                         <%

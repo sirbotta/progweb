@@ -67,7 +67,7 @@ public class AddProductServlet extends HttpServlet {
         body += "<a href='"+ getServletContext().getContextPath()+"/Logout" +"'>Sign out</a>\n";
         body += "</div>\n";
         body += "</div>\n";
-        body += "<form action='"+ getServletContext().getContextPath()+"/InsertProduct" +"' method='POST' >\n";
+        body += "<form action='"+ getServletContext().getContextPath()+"/InsertProduct" +"' method='POST' id='addPr'>\n";
         body += "<div class='row-fluid'>\n";
         body += "<div class='span2'></div>\n";
         body += "<div class='span6' >\n";
@@ -86,14 +86,14 @@ public class AddProductServlet extends HttpServlet {
         
         body += "<p>\n";
         body += "Quantit&agrave;: <input type='text' placeholder='0' class='span2' name='qnt'/>\n";
-        body += "<input type='text' placeholder='UM es. \"Kg\"' class='span2' name='um'/>\n";
+        body += "Unit&agrave; di Misura: <input type='text' placeholder='UM es. \"Kg\"' class='span2' name='um'/>\n";
         body += "</p>\n";
         body += "<p>\n";
-        body += "Prezzo: <input type='text' placeholder='0.00' class='span2' name='price'/> &#8364;\n";
+        body += "Prezzo(&#8364;): <input type='text' placeholder='0.00' class='span2' name='price'/>\n";
         body += "</p>\n";
         body += "<p>\n";
         body += "Aggiungi il nome dell'immagine del prodotto<br>\n";
-        body += "<input type='text' placeholder='example.jpg' name='img_url'>\n";
+        body += "<input style='margin-left:10px;' type='text' placeholder='example.jpg' name='img_url'>\n";
         body += "</p>\n";
         body += "<button class='btn btn-mini' onClick='history.go(-1);return true;'>Annulla</button>";
         body += "<button type='reset' class='btn btn-mini'>Resetta</button>\n";
@@ -103,7 +103,8 @@ public class AddProductServlet extends HttpServlet {
         body += "</form>\n";
         body += "<!-- end of row-fluid -->\n";
         body += "</div>\n";
-        body += "<!-- end of container-fluid -->\n";
+        body += "<!-- end of container-fluid -->\n"
+                + "<script type='text/javascript' src='js/validator.js'></script>\n";
 
         page.addContent(body);
         

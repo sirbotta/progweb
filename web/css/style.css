@@ -22,58 +22,8 @@ body{
 .nav{
     margin-bottom: 0 !important;
 }
-/*
-.navbar-inner{    
-    border: 1px solid #7F705D  !important;
-    border-radius: 4px 4px 4px 4px !important;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.067) !important;
-}
 
-input,
-select{
-	color: #fff !important;
+.error{
+    display: inline;
+    color: #ff0000;
 }
-
-a{
-    color: #013220 !important;
-}
-
-.active > a{
-	color: #013220 !important;
-	font-weight: bold;
-}
-#scana{
-	border-right-color: white;
-	border-right-width: 1px;
-	border-right-style: solid;
-}
-
-nav-tabs > .active > a{
-    background-color: red !important;
-}
-
-.tabs-left > .nav-tabs > li > a {
-    margin-right: none !important;
-}
-
-.nav > li > a:hover {
-	color: #FFF !important;
-    background-color: transparent !important;
-}
-.img{
-	max-width: 300px;
-	max-height: 300px;
-	float: right;
-}
-.table-striped tbody tr:nth-child(2n+1) td, .table-striped tbody tr:nth-child(2n+1) th {
-    background-color:  transparent;
-}
-
-thead{
-	font-weight: bold;
-}
-
-p{
-	font-weight: normal;
-}
-*/

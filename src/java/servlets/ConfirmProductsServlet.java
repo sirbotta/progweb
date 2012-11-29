@@ -59,7 +59,7 @@ public class ConfirmProductsServlet extends HttpServlet {
         body += "<a href='"+ getServletContext().getContextPath()+"/Seller" +"'>Home</a>\n";
         body += "</div>\n";
         body += "<div class='span5'>\n";
-        body += "<h2>Conferma ordine</h2>\n";
+        body += "<h2>Conferma</h2>\n";
         body += "</div>\n";
         body += "<div class='span4'>\n";
         body += "<a href='"+ getServletContext().getContextPath()+"/Logout" +"'>Sign out</a>\n";

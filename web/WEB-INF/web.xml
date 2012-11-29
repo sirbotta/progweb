@@ -23,7 +23,7 @@
     <filter-mapping>
         <filter-name>receiptFilter</filter-name>
         <url-pattern>/receipts/*</url-pattern>
-    </filter-mapping>   
+    </filter-mapping>
     <filter-mapping>
         <filter-name>sessionFilter</filter-name>
         <servlet-name>Logout</servlet-name>
@@ -57,43 +57,39 @@
     </listener>
     <servlet>
         <servlet-name>Login</servlet-name>
-        <servlet-class>servlets.LoginServlet</servlet-class>
+        <servlet-class>servlets.backend.LoginServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Logout</servlet-name>
-        <servlet-class>servlets.LogoutServlet</servlet-class>
+        <servlet-class>servlets.backend.LogoutServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LandingBuyer</servlet-name>
-        <servlet-class>servlets.LandingBuyerServlet</servlet-class>
+        <servlet-class>servlets.backend.LandingBuyerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowProductsBuyer</servlet-name>
-        <servlet-class>servlets.ShowProductsBuyerServlet</servlet-class>
+        <servlet-class>servlets.backend.ShowProductsBuyerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Confirm</servlet-name>
-        <servlet-class>servlets.ConfirmProductsServlet</servlet-class>
+        <servlet-class>servlets.backend.ConfirmProductsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LandingSeller</servlet-name>
-        <servlet-class>servlets.LandingSellerServlet</servlet-class>
-    </servlet>
-    <servlet>
-        <servlet-name>ShowProductsSeller</servlet-name>
-        <servlet-class>servlets.ShowProductsSellerServlet</servlet-class>
+        <servlet-class>servlets.backend.LandingSellerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddProduct</servlet-name>
-        <servlet-class>servlets.AddProductServlet</servlet-class>
+        <servlet-class>servlets.backend.AddProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProcessOrder</servlet-name>
-        <servlet-class>servlets.ProcessOrderServlet</servlet-class>
+        <servlet-class>servlets.frontend.ProcessOrderServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InsertProduct</servlet-name>
-        <servlet-class>servlets.InsertProductServlet</servlet-class>
+        <servlet-class>servlets.frontend.InsertProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>
@@ -118,10 +114,6 @@
     <servlet-mapping>
         <servlet-name>LandingSeller</servlet-name>
         <url-pattern>/Seller</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>ShowProductsSeller</servlet-name>
-        <url-pattern>/ProductsSeller</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AddProduct</servlet-name>

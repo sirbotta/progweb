@@ -6,6 +6,7 @@ package helpers;
 
 /**
  * @author Samuele
+ * Classe che genera la pagina html da mostrare sulle servlet.
  */
 public class PageHelper {
     private String head, body;

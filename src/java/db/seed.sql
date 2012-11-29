@@ -1,14 +1,14 @@
 INSERT INTO CATEGORY (name) VALUES('Ortaggi'),('Legumi'),('Frutta'),('Frutta Secca');
 
 INSERT INTO USERS (username,password,role) VALUES 
-('ciccio','ciccio','seller'),
-('pino','pino','seller'),
+('nicola','nicola','seller'),
+('simone','simone','seller'),
 ('mercante','mercante','seller'),
-('elettra','elettra','seller'),
-('canto','canto','buyer'),
-('gino','gino','buyer'),
-('perla','perla','buyer'),
-('scana','scana','buyer'); 
+('venditore','venditore','seller'),
+('cliente','cliente','buyer'),
+('alberto','alberto','buyer'),
+('andrea','andrea','buyer'),
+('samuele','samuele','buyer'); 
 
 
 
@@ -25,7 +25,7 @@ INSERT INTO PRODUCTS (name,seller_id,category_id,quantity,um,price,date_timeinse
 ('Lenticchie',1,2,500,'g',3.50,'2012-11-19',''),
 ('Farro',1,2,300,'g',4.30,'2012-11-19',''),
 ('Mele',2,3,5,'Kg',9,'2012-11-19','mela.jpg'),
-('Arancie',2,3,300,'g',12,'2012-11-19','arancia.jpg'),
+('Arance',2,3,300,'g',12,'2012-11-19','arancia.jpg'),
 ('Fragole',2,3,300,'g',12,'2012-11-19','fragole.jpg'),
 ('Kiwi',2,3,300,'g',12,'2012-11-19','kiwi.jpg'),
 ('Banane',2,3,300,'g',12,'2012-11-19','banane.jpg'),

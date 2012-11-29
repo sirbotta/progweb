@@ -2,13 +2,14 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package servlets.backend;
 
 import db.DBManager;
+import db.User;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +20,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author simone
  */
-public class InsertProductServlet extends HttpServlet {
+//servlet che controlla il login utente e la sessione
+public class LoginServlet extends HttpServlet {
 
     private DBManager manager;
 
@@ -40,19 +42,40 @@ public class InsertProductServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException, SQLException {
-        HttpSession session = request.getSession(false);
-        int seller_id = Integer.parseInt(session.getAttribute("user_id").toString());
-        String product_name = request.getParameter("product");
-        int category_id = Integer.parseInt(request.getParameter("cat_id"));
-        int quantity = Integer.parseInt(request.getParameter("qnt"));
-        String UM = request.getParameter("um");
-        Double price = Double.parseDouble(request.getParameter("price"));
-        String image_url = request.getParameter("img_url");
+            throws ServletException, IOException {
 
-        manager.addProduct(product_name, seller_id, category_id, quantity, UM, price, image_url);
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
+        User user;
+        // controllo nel DB se esiste un utente con lo stesso username + password User user;
+        try {
+            user = manager.authenticate(username, password);
+        } catch (SQLException ex) {
+            throw new ServletException(ex);
+        }
 
-        response.sendRedirect(request.getContextPath() + "/Seller");
+        if (user == null) {
+            request.setAttribute("message", "Username/password non esistente !");
+            request.setAttribute("message_type", "warning");
+            RequestDispatcher rd = request.getRequestDispatcher("/");
+            rd.forward(request, response);
+        } else {
+
+            // imposto l'utente connesso come attributo di sessione
+            // per adesso e' solo un oggetto String con il nome dell'utente,ma posso metterci anche un oggetto User
+            // con, ad esempio, il timestamp di login
+            HttpSession session = request.getSession(true);
+            session.setAttribute("user", user);
+            session.setAttribute("username", username);
+            session.setAttribute("user_id", user.getId());
+            session.setAttribute("role", user.getRole());
+            // mando un redirect alla servlet che carica i prodotti
+            if ("buyer".equals(user.getRole())) {
+                response.sendRedirect(request.getContextPath() + "/Buyer");
+            } else {
+                response.sendRedirect(request.getContextPath() + "/Seller");
+            }
+        }
 
     }
 
@@ -69,11 +92,7 @@ public class InsertProductServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(InsertProductServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**
@@ -88,11 +107,7 @@ public class InsertProductServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
-            processRequest(request, response);
-        } catch (SQLException ex) {
-            Logger.getLogger(InsertProductServlet.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        processRequest(request, response);
     }
 
     /**

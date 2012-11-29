@@ -50,9 +50,7 @@
                         </label>
                         <input type='text' placeholder='username' name='username'>
                         <input type='password' placeholder='password' name='password'>
-                        <label class='checkbox'>
-                            <input type='checkbox'> Remember me
-                        </label>
+                        <br>
                         <button type='submit' class='btn'>Sign in</button>
                     </form>
                 </div>

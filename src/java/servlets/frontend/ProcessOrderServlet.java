@@ -2,16 +2,11 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package servlets.frontend;
 
-import com.itextpdf.text.Chunk;
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
-import com.itextpdf.text.Font;
-import com.itextpdf.text.FontFactory;
 import com.itextpdf.text.Image;
-import com.itextpdf.text.List;
-import com.itextpdf.text.ListItem;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
 import db.DBManager;
@@ -64,7 +59,7 @@ public class ProcessOrderServlet extends HttpServlet {
 
         Product p = manager.getProductById(product_id);
         //@TODO check product quantity
-        if (p.getQuantity() != 0) {
+        if (p != null && p.getQuantity() > 0) {
 
             //create pdf receipt
             String filename = hashWord(buyer_id+""+product_id+""+(int)Math.random()*10000)+".pdf";
@@ -81,15 +76,9 @@ public class ProcessOrderServlet extends HttpServlet {
                 // step 3: we open the document
                 document.open();
 
-                //write bla bla blah
+                //write about receipt
                 java.util.Date today = new java.util.Date();
                 
-                List list = new List(true, 20);
-                list.add(new ListItem(""+product_id));
-                list.add(new ListItem(""+buyer_id));
-                list.add(new ListItem(""+p.getQuantity()));
-                list.add(new ListItem(""+buyer_id));
-                list.add(new ListItem(""+p.getPrice()));
                 
                 document.add(new Paragraph("Ricevuta - Data "+ today.toString()));
                 
@@ -146,6 +135,7 @@ public class ProcessOrderServlet extends HttpServlet {
 
     }
     
+    //metodo usato per criptare una stringa
     private String hashWord(String word) {
         String hashstring = null;
         try {

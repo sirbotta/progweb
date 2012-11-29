@@ -15,7 +15,7 @@ import javax.servlet.ServletContextListener;
  *
  * @author simone
  */
-//listener per istanziare la classe dbmanager per fare le query
+//listener per istanziare la classe dbmanager per fare le query quando viene caricato il context su server
 public class WebappContextListener implements ServletContextListener {
 
     @Override

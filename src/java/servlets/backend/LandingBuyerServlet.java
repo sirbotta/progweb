@@ -2,7 +2,7 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package servlets;
+package servlets.backend;
 
 import db.*;
 import helpers.PageHelper;
@@ -33,7 +33,7 @@ public class LandingBuyerServlet extends HttpServlet {
         // inizializza il DBManager dagli attributi di Application
         this.manager = (DBManager) super.getServletContext().getAttribute("dbmanager");
     }
-
+    
     /**
      * Processes requests for both HTTP
      * <code>GET</code> and

@@ -45,7 +45,7 @@ public class DBManager implements Serializable {
         }
     }
 
-       //controlla se esiste l'utente e restituisce l'oggetto user con i dati
+    //controlla se esiste l'utente e restituisce l'oggetto user con i dati
     public User authenticate(String username, String password) throws SQLException {
         PreparedStatement stm = con.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
         try {
@@ -95,6 +95,7 @@ public class DBManager implements Serializable {
         return categoryList;
     }
     
+   //recupera una singola categoria tramite l'id
     public Category getCategoryById(int category_id) throws SQLException {
         Category c = new Category();
         PreparedStatement stm = con.prepareStatement("SELECT * FROM category "
@@ -122,7 +123,7 @@ public class DBManager implements Serializable {
         
     }
     
-    
+    //recupera un singolo prodotto tramite id
     public Product getProductById(int product_id) throws SQLException {
         Product p = new Product();
         PreparedStatement stm = con.prepareStatement(
@@ -357,7 +358,7 @@ public class DBManager implements Serializable {
         }
     }
 
-    //scala la quantità da products, se fallisce restituisce 0
+    //scala la quantità da products e aggiorna con 0, se fallisce restituisce 0 (il front end mostra i prodotti a zero come esauriti)
     public int removeProduct(int product_id) throws SQLException {
         PreparedStatement stm = con.prepareStatement(
                 "UPDATE products "

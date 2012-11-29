@@ -20,6 +20,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author simone
+ * Filtro per i buyer mappato su tutte le pagine dei buyer, in caso di pagina non accessibile fa un forward alla landing page 
  */
 public class sellerFilter implements Filter {
     

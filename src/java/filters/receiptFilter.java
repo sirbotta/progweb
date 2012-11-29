@@ -21,6 +21,7 @@ import javax.servlet.http.HttpSession;
 /**
  *
  * @author simone
+ * filtro mappato su tutte le ricevute, reindirizza a login se l'utente non è loggato
  */
 
 //filtro per gestire la sicurezza delle ricevute in PDF

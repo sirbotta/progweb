@@ -92,9 +92,14 @@ public class ProcessOrderServlet extends HttpServlet {
                 list.add(new ListItem(""+p.getPrice()));
                 
                 document.add(new Paragraph("Ricevuta - Data "+ today.toString()));
+                
+                //@TODO eccezione per le foto
+                
                 document.add(new Paragraph("Prodotto: "+ p.getName()+" | Categoria:"+p.getCategory()));
+                if(!"".equals(p.getUrlImage())){
                 Image jpg = Image.getInstance(getServletContext().getRealPath("/img/"+p.getUrlImage()));
                 document.add(jpg);
+                }
                 document.add(new Paragraph("Venditore: "+ p.getUser()));
                 document.add(new Paragraph("Quantità: "+ p.getQuantity()));
                 document.add(new Paragraph("Prezzo Totale: "+ p.getPrice()));

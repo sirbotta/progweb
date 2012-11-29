@@ -65,31 +65,31 @@
     </servlet>
     <servlet>
         <servlet-name>LandingBuyer</servlet-name>
-        <servlet-class>servlets.backend.LandingBuyerServlet</servlet-class>
+        <servlet-class>servlets.frontend.LandingBuyerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ShowProductsBuyer</servlet-name>
-        <servlet-class>servlets.backend.ShowProductsBuyerServlet</servlet-class>
+        <servlet-class>servlets.frontend.ShowProductsBuyerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>Confirm</servlet-name>
-        <servlet-class>servlets.backend.ConfirmProductsServlet</servlet-class>
+        <servlet-class>servlets.frontend.ConfirmProductsServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>LandingSeller</servlet-name>
-        <servlet-class>servlets.backend.LandingSellerServlet</servlet-class>
+        <servlet-class>servlets.frontend.LandingSellerServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>AddProduct</servlet-name>
-        <servlet-class>servlets.backend.AddProductServlet</servlet-class>
+        <servlet-class>servlets.frontend.AddProductServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>ProcessOrder</servlet-name>
-        <servlet-class>servlets.frontend.ProcessOrderServlet</servlet-class>
+        <servlet-class>servlets.backend.ProcessOrderServlet</servlet-class>
     </servlet>
     <servlet>
         <servlet-name>InsertProduct</servlet-name>
-        <servlet-class>servlets.frontend.InsertProductServlet</servlet-class>
+        <servlet-class>servlets.backend.InsertProductServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>Login</servlet-name>

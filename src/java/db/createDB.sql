@@ -1,3 +1,5 @@
+--creare un db su derby di nome jbp come impostato nel contentx
+
 drop table orders;
 drop table products;
 drop table category;
